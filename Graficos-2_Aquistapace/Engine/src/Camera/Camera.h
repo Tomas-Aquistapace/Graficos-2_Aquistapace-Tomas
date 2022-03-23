@@ -35,7 +35,7 @@ namespace Engine
 		void UpdateView();
 		void UpdateMVP(glm::mat4 model);
 		void SetIndex(unsigned int shaderId);
-		void SetCameraValues(CameraType type, float near, float far);
+		void SetCameraValues(CameraType type, float widht, float height, float near, float far);
 
 		void SetCameraPosition(float x, float y, float z);
 	};

@@ -30,7 +30,7 @@ namespace Engine
 		StartEngine(1200, 600, "Graficos 1 - Parcial N2");
 		srand(time(NULL));
 
-		SetCamera(CameraType::Perspective, 0.1f, 100.0f);
+		SetCamera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
 		SetCameraPosition(0, 0, 5);
 
 		// --------------------------------

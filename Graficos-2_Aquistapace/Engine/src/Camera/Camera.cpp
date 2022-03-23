@@ -51,12 +51,13 @@ namespace Engine
 		_projectionInd = glGetUniformLocation(shaderId, "projection");
 	}
 
-	void Camera::SetCameraValues(CameraType type, float near, float far)
+	void Camera::SetCameraValues(CameraType type, float widht, float height, float near, float far)
 	{
 		switch (type)
 		{
 		case CameraType::Perspective:
-			_projection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, near, far);
+			// 1366.0f / 768.0f
+			_projection = glm::perspective(glm::radians(45.0f), widht / height, near, far);
 			break;
 
 		case CameraType::Ortho:

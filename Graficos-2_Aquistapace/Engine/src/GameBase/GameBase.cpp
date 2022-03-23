@@ -69,9 +69,9 @@ namespace Engine
 
 	//===========================================
 
-	void GameBase::SetCamera(CameraType type, float near, float far)
+	void GameBase::SetCamera(CameraType type, float widht, float height, float near, float far)
 	{
-		_renderer->SetCameraValues(type, near, far);
+		_renderer->SetCameraValues(type, widht, height, near, far);
 	}
 
 	void GameBase::SetCameraPosition(float x, float y, float z)
