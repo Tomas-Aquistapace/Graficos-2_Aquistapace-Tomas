@@ -24,7 +24,8 @@ namespace Engine
 		glm::mat4 _view;
 
 		glm::vec3 _cameraPos;
-		glm::vec3 _cameraFront;
+		glm::vec3 _cameraDirection;
+		glm::vec3 _cameraRight;
 		glm::vec3 _cameraUp;
 
 	public:
@@ -38,6 +39,9 @@ namespace Engine
 		void SetCameraValues(CameraType type, float widht, float height, float near, float far);
 
 		void SetCameraPosition(float x, float y, float z);
+		void SetCameraDirection(glm::vec3 target);
+		
+		void LookAt(glm::vec3 target);
 	};
 }
 

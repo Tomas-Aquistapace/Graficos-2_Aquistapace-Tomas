@@ -7,12 +7,20 @@ namespace Engine
 {
 	Camera::Camera()
 	{
-		_projection = glm::mat4(1.0f);
-		_view = glm::mat4(1.0f);
-
 		_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-		_cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-		_cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+		_cameraDirection = glm::normalize(_cameraPos - cameraTarget);
+
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+		_cameraRight = glm::normalize(glm::cross(up, _cameraDirection));
+
+		_cameraUp = glm::cross(_cameraDirection, _cameraRight);
+
+
+		_view = glm::lookAt(_cameraPos, cameraTarget, up);
+
+		_projection = glm::mat4(1.0f);
 	}
 
 	Camera::~Camera()
@@ -33,7 +41,7 @@ namespace Engine
 
 	void Camera::UpdateView()
 	{
-		_view = glm::lookAt(_cameraPos, _cameraPos + _cameraFront, _cameraUp);
+		_view = glm::lookAt(_cameraPos, _cameraPos + _cameraRight, _cameraUp);
 	}
 
 	void Camera::UpdateMVP(glm::mat4 model)
@@ -72,4 +80,13 @@ namespace Engine
 		_cameraPos = glm::vec3(x, y, z);
 	}
 
+	void Camera::SetCameraDirection(glm::vec3 target)
+	{
+		_cameraDirection = glm::normalize(_cameraPos - target);
+	}
+
+	void Camera::LookAt(glm::vec3 target)
+	{
+		_view = glm::lookAt(_cameraPos, target, _cameraUp);
+	}
 }

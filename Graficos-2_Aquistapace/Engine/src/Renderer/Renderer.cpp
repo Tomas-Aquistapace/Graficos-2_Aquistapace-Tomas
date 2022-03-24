@@ -144,15 +144,26 @@ namespace Engine
 		glDeleteBuffers(1, &ebo);
 	}
 
-	void Renderer::SetCameraValues(CameraType type, float widht, float height, float near, float far)
+
+
+
+	void Renderer::SetCameraInUse(Camera* camera)
 	{
-		_camera->SetCameraValues(type, widht, height, near, far);
+		_camera = camera;
 	}
 
-	void Renderer::SetCameraPosition(float x, float y, float z)
-	{
-		_camera->SetCameraPosition(x, y, z);
-	}
+
+
+
+	//void Renderer::SetCameraValues(CameraType type, float widht, float height, float near, float far)
+	//{
+	//	_camera->SetCameraValues(type, widht, height, near, far);
+	//}
+	//
+	//void Renderer::SetCameraPosition(float x, float y, float z)
+	//{
+	//	_camera->SetCameraPosition(x, y, z);
+	//}
 
 	// ----------------------------
 

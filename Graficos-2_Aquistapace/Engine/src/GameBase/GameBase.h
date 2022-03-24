@@ -3,6 +3,7 @@
 
 #include "../Window/Window.h"
 #include "../Renderer/Renderer.h"
+#include "../Camera/Camera.h"
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
 #include "../Animation/Animation.h"
@@ -19,6 +20,9 @@ namespace Engine
 		Window* _window;
 		CollisionManager* _collisionManager;
 
+		std::vector<Camera*> _cameras; // que lo haga el usuario si quiere
+		Camera* _defaultCamera;
+
 	public:
 		GameBase();
 		~GameBase();
@@ -29,9 +33,14 @@ namespace Engine
 
 		virtual void Update(float deltatime) = 0;
 
-		void SetCamera(CameraType type, float widht, float height, float near, float far);
-		void SetCameraPosition(float x, float y, float z);
+		//void SetCamera(CameraType type, float width, float height, float near, float far);
+		//void SetCameraPosition(float x, float y, float z);
 
+
+		void CreateCamera(CameraType type, float width, float height, float near, float far);
+		void SelectCamera(int i);
+
+		Camera* GetCamera(int i);
 		Renderer* GetRenderer();
 		CollisionManager* GetCollisionManager();
 	};

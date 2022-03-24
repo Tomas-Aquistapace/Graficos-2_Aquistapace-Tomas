@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include <iostream>
+#include <algorithm>
 
 namespace Engine
 {

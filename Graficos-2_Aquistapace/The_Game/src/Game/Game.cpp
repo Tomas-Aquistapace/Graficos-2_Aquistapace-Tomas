@@ -9,8 +9,7 @@ namespace Engine
 		_roboBob = NULL;
 		_wall1 = NULL;
 		_wall2 = NULL;
-		_box = NULL;
-		
+		_box = NULL;		
 	}
 
 	Game::~Game()
@@ -27,11 +26,17 @@ namespace Engine
 
 	void Game::Start()
 	{
-		StartEngine(1200, 600, "Graficos 1 - Parcial N2");
+		StartEngine(1200, 600, "Graficos 2 - Aquistapace");
 		srand(time(NULL));
 
-		SetCamera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
-		SetCameraPosition(0, 0, 5);
+
+		CreateCamera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
+		SelectCamera(0);
+		GetCamera(0)->SetCameraPosition(0,0,5);
+
+
+		//SetCamera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
+		//SetCameraPosition(0, 0, 5);
 
 		// --------------------------------
 		
