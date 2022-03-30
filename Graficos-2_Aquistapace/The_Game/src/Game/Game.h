@@ -9,12 +9,11 @@ namespace Engine
 	class Game : public GameBase
 	{
 	private:
-		Player* _bob;
+		Player* _roboBob;
 		Sprite* _wall1;
 		Sprite* _wall2;
 		Sprite* _box;
-
-		Player* _roboBob;
+		Camera* _camera;
 
 	public:
 		Game();

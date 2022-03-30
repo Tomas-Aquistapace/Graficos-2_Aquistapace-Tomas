@@ -14,10 +14,6 @@ namespace Engine
 		_window = new Window();
 		_renderer = new Renderer();
 		_collisionManager = new CollisionManager();
-
-		_defaultCamera = new Camera();
-
-		_renderer->SetCameraInUse(_defaultCamera);
 	}
 
 	GameBase::~GameBase()
@@ -28,16 +24,6 @@ namespace Engine
 			delete _renderer;
 		if (_collisionManager != NULL)
 			delete _collisionManager;
-
-		if(!_cameras.empty())
-		{
-			for(Camera* obj : _cameras)
-			{
-				if (obj != NULL)
-					delete obj;
-			}
-			_cameras.clear();
-		}
 	}
 
 	int GameBase::StartEngine(int width, int height, const char* windowName) 
@@ -83,49 +69,9 @@ namespace Engine
 
 	//===========================================
 
-	//void GameBase::SetCamera(CameraType type, float widht, float height, float near, float far)
-	//{
-	//	_renderer->SetCameraValues(type, widht, height, near, far);
-	//}
-	//
-	//void GameBase::SetCameraPosition(float x, float y, float z)
-	//{
-	//	_renderer->SetCameraPosition(x, y, z);
-	//}
-
-
-
-
-
-	void GameBase::CreateCamera(CameraType type, float width, float height, float near, float far)
+	void GameBase::SetCameraInUse(Camera* camera)
 	{
-		Camera* newCamera = new Camera();
-		newCamera->SetCameraValues(type, width, height, near, far);
-		_cameras.push_back(newCamera);
-	}
-
-	void GameBase::SelectCamera(int i)
-	{
-		_renderer->SetCameraInUse(GetCamera(i));
-	}
-
-
-
-	Camera* GameBase::GetCamera(int i)
-	{
-		if (!_cameras.empty())
-		{
-			for (int j = 0; j < _cameras.size(); j++)
-			{
-				if (j == i)
-					return _cameras[i];
-			}
-			std::cout << "ERROR::the value not exist in the vector" << std::endl;
-		}
-		else
-			std::cout << "ERROR::the vector is empty" << std::endl;
-
-		return _defaultCamera;
+		_renderer->SetCameraInUse(camera);
 	}
 
 	Renderer* GameBase::GetRenderer()

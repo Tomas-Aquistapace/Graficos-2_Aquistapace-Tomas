@@ -28,8 +28,11 @@ namespace Engine
 		glm::vec3 _cameraRight;
 		glm::vec3 _cameraUp;
 
+		void DefaulValues();
+
 	public:
 		Camera();
+		Camera(CameraType type, float widht, float height, float near, float far);
 		~Camera();
 
 		//void UpdateCameraVectors();

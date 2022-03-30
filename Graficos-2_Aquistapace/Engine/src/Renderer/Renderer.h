@@ -20,6 +20,17 @@ namespace Engine
 		Shader* _shader;
 		Camera* _camera;
 
+		// Default Camera Variables:
+		unsigned int _defModelInd;
+		unsigned int _defViewInd;
+		unsigned int _defProjectionInd;
+
+		glm::mat4 _defProjection;
+		glm::mat4 _defView;
+
+		void DefaultCameraValues();
+		void DefaultCameraIndex(unsigned int shaderId);
+
 	public:
 		Renderer();
 		~Renderer();
@@ -39,8 +50,6 @@ namespace Engine
 
 		void SetCameraInUse(Camera* camera);
 
-		//void SetCameraValues(CameraType type, float widht, float height, float near, float far);
-		//void SetCameraPosition(float x, float y, float z);
 		unsigned int GetShader();
 	};
 }

@@ -7,20 +7,13 @@ namespace Engine
 {
 	Camera::Camera()
 	{
-		_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-
-		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-		_cameraDirection = glm::normalize(_cameraPos - cameraTarget);
-
-		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-		_cameraRight = glm::normalize(glm::cross(up, _cameraDirection));
-
-		_cameraUp = glm::cross(_cameraDirection, _cameraRight);
-
-
-		_view = glm::lookAt(_cameraPos, cameraTarget, up);
-
-		_projection = glm::mat4(1.0f);
+		DefaulValues();
+	}
+	
+	Camera::Camera(CameraType type, float widht, float height, float near, float far)
+	{
+		DefaulValues();
+		SetCameraValues(type, widht, height, near, far);
 	}
 
 	Camera::~Camera()
@@ -64,7 +57,6 @@ namespace Engine
 		switch (type)
 		{
 		case CameraType::Perspective:
-			// 1366.0f / 768.0f
 			_projection = glm::perspective(glm::radians(45.0f), widht / height, near, far);
 			break;
 
@@ -88,5 +80,26 @@ namespace Engine
 	void Camera::LookAt(glm::vec3 target)
 	{
 		_view = glm::lookAt(_cameraPos, target, _cameraUp);
+	}
+
+	// --------------------------------------------
+	// Internal Functions
+
+	void Camera::DefaulValues()
+	{
+		_cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+
+		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+		_cameraDirection = glm::normalize(_cameraPos - cameraTarget);
+
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+		_cameraRight = glm::normalize(glm::cross(up, _cameraDirection));
+
+		_cameraUp = glm::cross(_cameraDirection, _cameraRight);
+
+
+		_view = glm::lookAt(_cameraPos, cameraTarget, up);
+
+		_projection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, 0.1f, 100.0f);
 	}
 }

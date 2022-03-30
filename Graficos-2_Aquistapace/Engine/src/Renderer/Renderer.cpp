@@ -9,7 +9,9 @@ namespace Engine
 	Renderer::Renderer()
 	{		
 		_shader = new Shader();
-		_camera = new Camera();
+
+		DefaultCameraValues();
+		//_camera = new Camera();
 	}
 
 	Renderer::~Renderer()
@@ -88,7 +90,8 @@ namespace Engine
 		_shader->SetShader("../Engine/shaders/Vertex.shader", "../Engine/shaders/Fragment.shader");
 		glUseProgram(_shader->GetShader());
 
-		_camera->SetIndex(_shader->GetShader());
+		DefaultCameraIndex(_shader->GetShader());
+		//_camera->SetIndex(_shader->GetShader());
 	}
 	
 	void Renderer::BindTexture(unsigned int& texture)
@@ -124,7 +127,14 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 		glUniformMatrix4fv(modelUniform, 1, GL_FALSE, glm::value_ptr(model));
 
-		_camera->UpdateMVP(model);
+		if(_camera != NULL)
+			_camera->UpdateMVP(model);
+		else
+		{
+			glUniformMatrix4fv(_defModelInd, 1, GL_FALSE, glm::value_ptr(model));
+			glUniformMatrix4fv(_defViewInd, 1, GL_FALSE, glm::value_ptr(_defView));
+			glUniformMatrix4fv(_defProjectionInd, 1, GL_FALSE, glm::value_ptr(_defProjection));
+		}
 
 		glUseProgram(0);
 	}
@@ -144,31 +154,46 @@ namespace Engine
 		glDeleteBuffers(1, &ebo);
 	}
 
-
-
-
 	void Renderer::SetCameraInUse(Camera* camera)
 	{
-		_camera = camera;
+		if (camera == NULL)
+		{
+			std::cout << "Error:: the camera is NULL" << std::endl;
+		}
+		else
+		{
+			if (_camera != NULL)
+				_camera = NULL;
+
+			_camera = camera;
+			_camera->SetIndex(_shader->GetShader());
+		}
 	}
-
-
-
-
-	//void Renderer::SetCameraValues(CameraType type, float widht, float height, float near, float far)
-	//{
-	//	_camera->SetCameraValues(type, widht, height, near, far);
-	//}
-	//
-	//void Renderer::SetCameraPosition(float x, float y, float z)
-	//{
-	//	_camera->SetCameraPosition(x, y, z);
-	//}
 
 	// ----------------------------
 
-	unsigned int Renderer::GetShader() 
+	unsigned int Renderer::GetShader()
 	{
 		return _shader->GetShader();
+	}
+
+	// ----------------------------
+	// Private Functions:
+
+	void Renderer::DefaultCameraValues()
+	{
+		glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 5.0f);
+		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+		
+		_defView = glm::lookAt(cameraPos, cameraTarget, up);
+		_defProjection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, 0.1f, 100.0f);
+	}
+	
+	void Renderer::DefaultCameraIndex(unsigned int shaderId)
+	{
+		_defModelInd = glGetUniformLocation(shaderId, "model");
+		_defViewInd = glGetUniformLocation(shaderId, "view");
+		_defProjectionInd = glGetUniformLocation(shaderId, "projection");
 	}
 }
