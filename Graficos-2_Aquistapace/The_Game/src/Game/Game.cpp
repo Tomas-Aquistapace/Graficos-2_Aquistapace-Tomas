@@ -11,22 +11,37 @@ namespace Engine
 		_wall2 = NULL;
 		_box = NULL;
 
-		_camera = NULL;
+		_cameraGame = NULL;
 	}
 
 	Game::~Game()
 	{
 		if (_roboBob != NULL)
+		{
 			delete _roboBob;
+			_roboBob = NULL;
+		}
 		if (_wall1 != NULL)
+		{
 			delete _wall1;
+			_wall1 = NULL;
+		}
 		if (_wall2 != NULL)
+		{
 			delete _wall2;
+			_wall2 = NULL;
+		}
 		if (_box != NULL)
+		{
 			delete _box;
+			_box = NULL;
+		}
 
-		if (_camera != NULL)
-			delete _camera;
+		if (_cameraGame != NULL)
+		{
+			delete _cameraGame;
+			_cameraGame = NULL;
+		}
 	}
 
 	void Game::Start()
@@ -34,16 +49,10 @@ namespace Engine
 		StartEngine(1200, 600, "Graficos 2 - Aquistapace");
 		srand(time(NULL));
 
-		_camera = new Camera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
-		_camera->SetCameraPosition(0,0,5);
+		_cameraGame = new Camera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
+		_cameraGame->SetPosition(0,0,5);
 
-		SetCameraInUse(_camera);
-		////_camera->LookAt(_roboBob->_transform.position);
-		//
-		//_camera->SetCameraPosition(0,0,5);
-
-		//SetCamera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
-		//SetCameraPosition(0, 0, 5);
+		SetCameraInUse(_cameraGame);
 
 		// --------------------------------
 		
@@ -92,6 +101,21 @@ namespace Engine
 		_roboBob->Move(deltaTime);
 
 		GetCollisionManager()->CheckAllCollisions();
+
+		if (Input::GetKey(Keycode::I))
+		{
+			_cameraGame->MoveCamera(cameraSpeed * deltaTime, _cameraGame->GetFront());
+		}
+		if (Input::GetKey(Keycode::K))
+		{
+			_cameraGame->MoveCamera(-cameraSpeed * deltaTime, _cameraGame->GetFront());
+		}
+		if (Input::GetKey(Keycode::J))
+		{
+		}
+		if (Input::GetKey(Keycode::L))
+		{
+		}
 
 		_wall1->Draw();
 		_wall2->Draw();

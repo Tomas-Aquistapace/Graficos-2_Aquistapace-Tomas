@@ -63,6 +63,7 @@ namespace Engine
 	
 	void GameBase::EndEngine()
 	{
+		_renderer->UnlockCamera();
 		_renderer->StopShader();
 		glfwTerminate();
 	}

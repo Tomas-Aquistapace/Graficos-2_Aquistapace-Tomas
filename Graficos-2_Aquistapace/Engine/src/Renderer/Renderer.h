@@ -49,6 +49,7 @@ namespace Engine
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);
 
 		void SetCameraInUse(Camera* camera);
+		void UnlockCamera();
 
 		unsigned int GetShader();
 	};

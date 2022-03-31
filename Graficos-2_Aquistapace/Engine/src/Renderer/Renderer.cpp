@@ -11,7 +11,6 @@ namespace Engine
 		_shader = new Shader();
 
 		DefaultCameraValues();
-		//_camera = new Camera();
 	}
 
 	Renderer::~Renderer()
@@ -168,6 +167,12 @@ namespace Engine
 			_camera = camera;
 			_camera->SetIndex(_shader->GetShader());
 		}
+	}
+
+	void Renderer::UnlockCamera()
+	{
+		if (_camera != NULL)
+			_camera = NULL;
 	}
 
 	// ----------------------------

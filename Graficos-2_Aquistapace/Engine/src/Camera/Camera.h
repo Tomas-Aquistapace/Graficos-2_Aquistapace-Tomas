@@ -25,7 +25,7 @@ namespace Engine
 
 		glm::vec3 _cameraPos;
 		glm::vec3 _cameraDirection;
-		glm::vec3 _cameraRight;
+		glm::vec3 _cameraFront;
 		glm::vec3 _cameraUp;
 
 		void DefaulValues();
@@ -35,16 +35,24 @@ namespace Engine
 		Camera(CameraType type, float widht, float height, float near, float far);
 		~Camera();
 
-		//void UpdateCameraVectors();
 		void UpdateView();
 		void UpdateMVP(glm::mat4 model);
 		void SetIndex(unsigned int shaderId);
 		void SetCameraValues(CameraType type, float widht, float height, float near, float far);
 
-		void SetCameraPosition(float x, float y, float z);
-		void SetCameraDirection(glm::vec3 target);
-		
 		void LookAt(glm::vec3 target);
+
+		void SetPosition(float x, float y, float z);
+		void SetPosition(glm::vec3 position);
+		void SetDirection(float x, float y, float z);
+		void SetDirection(glm::vec3 target);
+
+		void MoveCamera(float speed, glm::vec3 direction);
+		void RotateCamera();
+
+		glm::vec3 GetPosition();
+		glm::vec3 GetFront();
+		glm::vec3 GetDirection();
 	};
 }
 

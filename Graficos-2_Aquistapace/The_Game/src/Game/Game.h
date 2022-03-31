@@ -13,7 +13,9 @@ namespace Engine
 		Sprite* _wall1;
 		Sprite* _wall2;
 		Sprite* _box;
-		Camera* _camera;
+		Camera* _cameraGame;
+
+		const float cameraSpeed = 2.25f;
 
 	public:
 		Game();
