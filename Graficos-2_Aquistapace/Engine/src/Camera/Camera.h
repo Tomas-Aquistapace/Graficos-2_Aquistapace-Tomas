@@ -1,10 +1,9 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <string>
-#include "glm\glm\mat4x4.hpp"
 #include "..\Shader\Shader.h"
-#include "..\Export\Export.h"
+#include "..\Window\Window.h"
+#include "..\Entity\Entity.h"
 
 namespace Engine
 {
@@ -13,7 +12,7 @@ namespace Engine
 		Ortho
 	};
 
-	class EXPORT_API Camera
+	class EXPORT_API Camera : public Entity
 	{
 	private:
 		unsigned int _modelInd;
@@ -23,18 +22,28 @@ namespace Engine
 		glm::mat4 _projection;
 		glm::mat4 _view;
 
-		glm::vec3 _cameraPos;
-		glm::vec3 _cameraDirection;
-		glm::vec3 _cameraFront;
-		glm::vec3 _cameraUp;
+		// Mouse:
+		float _yaw = -90.f;
+		float _pitch = 0.0f;
+		float _lastX = 800.f / 2;
+		float _lastY = 600.f / 2;
+
+		bool _firstMouse = true;
+
+		float _sensitivity = 1.5f;
+		// --------
 
 		void DefaulValues();
+		void UpdateValues();
+		void UpdateValuesFPS();
+		static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 	public:
 		Camera();
 		Camera(CameraType type, float widht, float height, float near, float far);
 		~Camera();
 
+		void SetFPSCamera(GLFWwindow* _window, float sensitivity);
 		void UpdateView();
 		void UpdateMVP(glm::mat4 model);
 		void SetIndex(unsigned int shaderId);
@@ -42,17 +51,12 @@ namespace Engine
 
 		void LookAt(glm::vec3 target);
 
-		void SetPosition(float x, float y, float z);
-		void SetPosition(glm::vec3 position);
-		void SetDirection(float x, float y, float z);
-		void SetDirection(glm::vec3 target);
+		// --------------------------------
+		// Virtual Functions:
 
-		void MoveCamera(float speed, glm::vec3 direction);
-		void RotateCamera();
-
-		glm::vec3 GetPosition();
-		glm::vec3 GetFront();
-		glm::vec3 GetDirection();
+		void SetColor(ENTITY_COLOR color);
+		void SetColor(float r, float g, float b);
+		void TriggerCollision(Entity* other);
 	};
 }
 

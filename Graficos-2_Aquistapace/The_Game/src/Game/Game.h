@@ -16,6 +16,7 @@ namespace Engine
 		Camera* _cameraGame;
 
 		const float cameraSpeed = 2.25f;
+		const float cameraSpeedRot = 20;
 
 	public:
 		Game();

@@ -51,8 +51,10 @@ namespace Engine
 
 		_cameraGame = new Camera(CameraType::Perspective, 1366.0f, 768.0f, 0.1f, 100.0f);
 		_cameraGame->SetPosition(0,0,5);
+		_cameraGame->SetRotationY(180);
 
 		SetCameraInUse(_cameraGame);
+		//SetFPSCamera(_cameraGame, 2.0f);
 
 		// --------------------------------
 		
@@ -104,18 +106,34 @@ namespace Engine
 
 		if (Input::GetKey(Keycode::I))
 		{
-			_cameraGame->MoveCamera(cameraSpeed * deltaTime, _cameraGame->GetFront());
+			_cameraGame->Move(cameraSpeed * deltaTime, _cameraGame->GetFront());
 		}
 		if (Input::GetKey(Keycode::K))
 		{
-			_cameraGame->MoveCamera(-cameraSpeed * deltaTime, _cameraGame->GetFront());
+			_cameraGame->Move(-cameraSpeed * deltaTime, _cameraGame->GetFront());
 		}
 		if (Input::GetKey(Keycode::J))
 		{
+			_cameraGame->SetRotationY(_cameraGame->_transform.rotation.y - (-cameraSpeedRot * deltaTime));
 		}
 		if (Input::GetKey(Keycode::L))
 		{
+			_cameraGame->SetRotationY(_cameraGame->_transform.rotation.y + (-cameraSpeedRot * deltaTime));
 		}
+		if (Input::GetKey(Keycode::U))
+		{
+			_cameraGame->SetRotationX(_cameraGame->_transform.rotation.x - (-cameraSpeedRot * deltaTime));
+		}
+		if (Input::GetKey(Keycode::O))
+		{
+			_cameraGame->SetRotationX(_cameraGame->_transform.rotation.x + (-cameraSpeedRot * deltaTime));
+		}
+		if (Input::GetKey(Keycode::SPACE))
+		{
+			_cameraGame->SetRotationY(180);
+		}
+
+		_cameraGame->UpdateView();
 
 		_wall1->Draw();
 		_wall2->Draw();

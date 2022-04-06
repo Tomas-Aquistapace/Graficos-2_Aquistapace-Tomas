@@ -3,6 +3,7 @@
 
 #include <string>
 #include "..\Export\Export.h"
+#include "..\Renderer\Renderer.h"
 #include "..\Entity\Entity.h"
 
 namespace Engine
@@ -41,6 +42,8 @@ namespace Engine
 		
 		TypeOfShape _shape;
 		unsigned int _modelUniform;
+
+		Renderer* _renderer;
 
 	public:
 		Shape(Renderer* renderer);

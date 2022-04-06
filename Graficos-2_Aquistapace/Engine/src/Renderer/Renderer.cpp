@@ -9,6 +9,7 @@ namespace Engine
 	Renderer::Renderer()
 	{		
 		_shader = new Shader();
+		_camera = NULL;
 
 		DefaultCameraValues();
 	}
@@ -90,7 +91,6 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 
 		DefaultCameraIndex(_shader->GetShader());
-		//_camera->SetIndex(_shader->GetShader());
 	}
 	
 	void Renderer::BindTexture(unsigned int& texture)

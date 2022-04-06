@@ -93,12 +93,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_WINDLL;GraficosEngine_Exports;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib\glm;$(ProjectDir)lib\GLFW\include;$(ProjectDir)lib\GLEW\include;$(ProjectDir)lib\glm;$(ProjectDir)lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\glm;$(ProjectDir)lib\GLFW\include;$(ProjectDir)lib\GLEW\include;$(ProjectDir)lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib\GLFW\lib-vc2019;$(ProjectDir)lib\GLEW\lib\Win32;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\GLFW\lib-vc2019;$(ProjectDir)lib\GLEW\lib\Win32;$(ProjectDir)lib\glm</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

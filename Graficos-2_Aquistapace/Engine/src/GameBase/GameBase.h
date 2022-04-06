@@ -20,9 +20,6 @@ namespace Engine
 		Window* _window;
 		CollisionManager* _collisionManager;
 
-		//std::vector<Camera*> _cameras; // que lo haga el usuario si quiere
-		//Camera* _defaultCamera;
-
 	public:
 		GameBase();
 		~GameBase();
@@ -34,6 +31,7 @@ namespace Engine
 		virtual void Update(float deltatime) = 0;
 
 		void SetCameraInUse(Camera* camera);
+		void SetFPSCamera(Camera* camera, float sensitivity);
 
 		Renderer* GetRenderer();
 		CollisionManager* GetCollisionManager();
