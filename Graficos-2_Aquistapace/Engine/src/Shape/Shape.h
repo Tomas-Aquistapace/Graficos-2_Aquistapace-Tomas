@@ -24,36 +24,48 @@ namespace Engine
 			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
 		};
 
-		float _cubeVertex[144] = {
-			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+		float _cubeVertex[216] = {
+		/*Pos*/-0.5f, -0.5f, -0.5f, /*Color*/ 0.0f,  0.0f, -1.0f,
+		/*Pos*/ 0.5f, -0.5f, -0.5f, /*Color*/ 0.0f,  0.0f, -1.0f,
+		/*Pos*/ 0.5f,  0.5f, -0.5f, /*Color*/ 0.0f,  0.0f, -1.0f,
+		/*Pos*/ 0.5f,  0.5f, -0.5f, /*Color*/ 0.0f,  0.0f, -1.0f,
+		/*Pos*/-0.5f,  0.5f, -0.5f, /*Color*/ 0.0f,  0.0f, -1.0f,
+		/*Pos*/-0.5f, -0.5f, -0.5f, /*Color*/ 0.0f,  0.0f, -1.0f,
 
-			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+		/*Pos*/-0.5f, -0.5f,  0.5f, /*Color*/ 0.0f,  0.0f,  1.0f,
+		/*Pos*/ 0.5f, -0.5f,  0.5f, /*Color*/ 0.0f,  0.0f,  1.0f,
+		/*Pos*/ 0.5f,  0.5f,  0.5f, /*Color*/ 0.0f,  0.0f,  1.0f,
+		/*Pos*/ 0.5f,  0.5f,  0.5f, /*Color*/ 0.0f,  0.0f,  1.0f,
+		/*Pos*/-0.5f,  0.5f,  0.5f, /*Color*/ 0.0f,  0.0f,  1.0f,
+		/*Pos*/-0.5f, -0.5f,  0.5f, /*Color*/ 0.0f,  0.0f,  1.0f,
 
-			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+		/*Pos*/-0.5f,  0.5f,  0.5f, /*Color*/-1.0f,  0.0f,  0.0f,
+		/*Pos*/-0.5f,  0.5f, -0.5f, /*Color*/-1.0f,  0.0f,  0.0f,
+		/*Pos*/-0.5f, -0.5f, -0.5f, /*Color*/-1.0f,  0.0f,  0.0f,
+		/*Pos*/-0.5f, -0.5f, -0.5f, /*Color*/-1.0f,  0.0f,  0.0f,
+		/*Pos*/-0.5f, -0.5f,  0.5f, /*Color*/-1.0f,  0.0f,  0.0f,
+		/*Pos*/-0.5f,  0.5f,  0.5f, /*Color*/-1.0f,  0.0f,  0.0f,
 
-			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+		/*Pos*/ 0.5f,  0.5f,  0.5f, /*Color*/ 1.0f,  0.0f,  0.0f,
+		/*Pos*/ 0.5f,  0.5f, -0.5f, /*Color*/ 1.0f,  0.0f,  0.0f,
+		/*Pos*/ 0.5f, -0.5f, -0.5f, /*Color*/ 1.0f,  0.0f,  0.0f,
+		/*Pos*/ 0.5f, -0.5f, -0.5f, /*Color*/ 1.0f,  0.0f,  0.0f,
+		/*Pos*/ 0.5f, -0.5f,  0.5f, /*Color*/ 1.0f,  0.0f,  0.0f,
+		/*Pos*/ 0.5f,  0.5f,  0.5f, /*Color*/ 1.0f,  0.0f,  0.0f,
 
-			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+		/*Pos*/-0.5f, -0.5f, -0.5f, /*Color*/ 0.0f, -1.0f,  0.0f,
+		/*Pos*/ 0.5f, -0.5f, -0.5f, /*Color*/ 0.0f, -1.0f,  0.0f,
+		/*Pos*/ 0.5f, -0.5f,  0.5f, /*Color*/ 0.0f, -1.0f,  0.0f,
+		/*Pos*/ 0.5f, -0.5f,  0.5f, /*Color*/ 0.0f, -1.0f,  0.0f,
+		/*Pos*/-0.5f, -0.5f,  0.5f, /*Color*/ 0.0f, -1.0f,  0.0f,
+		/*Pos*/-0.5f, -0.5f, -0.5f, /*Color*/ 0.0f, -1.0f,  0.0f,
 
-			/*Pos*/-0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/-0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f, -0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f,
-			/*Pos*/ 0.1f,  0.1f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f
+		/*Pos*/-0.5f,  0.5f, -0.5f, /*Color*/ 0.0f,  1.0f,  0.0f,
+		/*Pos*/ 0.5f,  0.5f, -0.5f, /*Color*/ 0.0f,  1.0f,  0.0f,
+		/*Pos*/ 0.5f,  0.5f,  0.5f, /*Color*/ 0.0f,  1.0f,  0.0f,
+		/*Pos*/ 0.5f,  0.5f,  0.5f, /*Color*/ 0.0f,  1.0f,  0.0f,
+		/*Pos*/-0.5f,  0.5f,  0.5f, /*Color*/ 0.0f,  1.0f,  0.0f,
+		/*Pos*/-0.5f,  0.5f, -0.5f, /*Color*/ 0.0f,  1.0f,  0.0f
 		};
 
 		unsigned int _indexTris[3] = {
@@ -63,6 +75,21 @@ namespace Engine
 		unsigned int _indexPos[6] = {
 			0,1,2,
 			3,2,0
+		};
+		
+		unsigned int _indexPos[36] = {
+			0, 1, 2,
+			2, 3, 0,
+			1, 5, 6,
+			6, 2, 1,
+			7, 6, 5,
+			5, 4, 7,
+			4, 0, 3,
+			3, 7, 4,
+			4, 5, 1,
+			1, 0, 4,
+			3, 2, 6,
+			6, 7, 3
 		};
 
 		int _vertexSize;

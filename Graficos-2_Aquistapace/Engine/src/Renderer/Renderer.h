@@ -11,7 +11,8 @@ namespace Engine
 {
 	enum class TypeOfShape {
 		Triangle,
-		Quad
+		Quad,
+		Cube
 	};
 
 	class EXPORT_API Renderer
