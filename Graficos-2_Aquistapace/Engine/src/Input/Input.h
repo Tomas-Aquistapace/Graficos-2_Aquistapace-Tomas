@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "../src/Export/Export.h"
+#include "../Camera/Camera.h"
 
 struct GLFWwindow;
 
@@ -137,6 +138,8 @@ namespace Engine
 			static void SetWindow(GLFWwindow* window);
 			static bool GetKey(Keycode key);
 			static bool GetKeyUp(Keycode key);
+
+			static void SetFPSCamera(GLFWwindow* _window, Camera* camera, float sensitivity);
 	};
 }
 

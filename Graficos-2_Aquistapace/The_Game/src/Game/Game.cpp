@@ -54,7 +54,7 @@ namespace Engine
 		_cameraGame->SetRotationY(180);
 
 		SetCameraInUse(_cameraGame);
-		//SetFPSCamera(_cameraGame, 2.0f);
+		SetFPSCamera(_cameraGame, 0.05f);
 
 		// --------------------------------
 		
@@ -69,8 +69,10 @@ namespace Engine
 
 		_wall2 = new Sprite(GetRenderer());
 		_wall2->InitTexture();
-		_wall2->ImportTexture("res/wall.jpg");
+		_wall2->ImportTexture("res/camouflage.png");
 		_wall2->SetPosition(0, -1.2, 0);
+		_wall2->SetRotationX(90);
+		_wall2->SetScale(glm::vec3(10,10,10));
 		_wall2->SetStaticState(true);
 		GetCollisionManager()->AddNewObject(_wall2);
 		
@@ -95,7 +97,7 @@ namespace Engine
 	
 	void Game::Play()
 	{
-		UpdateEngine(0.0f, 0.0f, 0.0f, 1);
+		UpdateEngine(0.2f, 0.2f, 0.2f, 1);
 	}
 
 	void Game::Update(float deltaTime)

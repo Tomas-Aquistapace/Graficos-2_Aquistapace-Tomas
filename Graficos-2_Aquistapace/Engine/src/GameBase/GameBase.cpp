@@ -77,7 +77,7 @@ namespace Engine
 
 	void GameBase::SetFPSCamera(Camera* camera, float sensitivity)
 	{
-		camera->SetFPSCamera(_window->ReturnWindow(), sensitivity);
+		Input::SetFPSCamera(_window->ReturnWindow(), camera, sensitivity);
 	}
 
 	Renderer* GameBase::GetRenderer()

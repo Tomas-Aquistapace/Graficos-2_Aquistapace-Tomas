@@ -23,15 +23,6 @@ namespace Engine
 
 	}
 
-
-	void Camera::SetFPSCamera(GLFWwindow* _window, float sensitivity)
-	{
-		glfwSetCursorPosCallback(_window, mouse_callback);
-		glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-		_sensitivity = sensitivity;
-	}
-
 	void Camera::UpdateView()
 	{
 		_view = glm::lookAt(_transform.position, _transform.position + _transform.forward, _transform.up);
@@ -85,52 +76,6 @@ namespace Engine
 
 		_view = glm::lookAt(_transform.position, cameraTarget, _transform.up);
 		_projection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, 0.1f, 100.0f);
-	}
-
-	void Camera::UpdateValues()
-	{
-
-	}
-
-	void Camera::UpdateValuesFPS()
-	{
-		//_cameraFront.x = cos(glm::radians(_yaw)) * cos(glm::radians(_pitch));
-		//_cameraFront.y = sin(glm::radians(_pitch));
-		//_cameraFront.z = sin(glm::radians(_yaw)) * cos(glm::radians(_pitch));
-		//_cameraFront = glm::normalize(_cameraFront);
-		//
-		//_cameraUp = glm::normalize(glm::cross(GetRight(), _cameraFront));
-	}
-
-	void Camera::mouse_callback(GLFWwindow* window, double xpos, double ypos)
-	{
-		Camera* theCamera = static_cast<Camera*>(glfwGetWindowUserPointer(window));
-		
-		if (theCamera->_firstMouse)
-		{
-			theCamera->_lastX = xpos;
-			theCamera->_lastY = ypos;
-			theCamera->_firstMouse = false;
-		}
-
-		float xoffset = xpos - theCamera->_lastX;
-		float yoffset = theCamera->_lastY - ypos; // reversed since y-coordinates go from bottom to top
-		theCamera->_lastX = xpos;
-		theCamera->_lastY = ypos;
-
-		xoffset *= theCamera->_sensitivity;
-		yoffset *= theCamera->_sensitivity;
-
-		theCamera->_yaw += xoffset;
-		theCamera->_pitch += yoffset;
-
-		// make sure that when pitch is out of bounds, screen doesn't get flipped
-		if (theCamera->_pitch > 89.0f)
-			theCamera->_pitch = 89.0f;
-		if (theCamera->_pitch < -89.0f)
-			theCamera->_pitch = -89.0f;
-
-		theCamera->UpdateValuesFPS();
 	}
 
 	// ------------------------------------

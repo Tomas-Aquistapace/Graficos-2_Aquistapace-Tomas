@@ -51,7 +51,6 @@ namespace Engine
 		void SetPrebScale(glm::vec3 scale);
 
 	protected:
-		//Renderer* _renderer;
 		GeneralMatrix _generalMatrix;
 
 		bool _isTrigger;
@@ -61,7 +60,6 @@ namespace Engine
 		void UpdateTransformsData();
 
 	public:
-		//Entity(Renderer* renderer);
 		Entity();
 		~Entity();
 
