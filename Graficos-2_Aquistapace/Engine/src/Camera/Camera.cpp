@@ -61,21 +61,36 @@ namespace Engine
 		_view = glm::lookAt(_transform.position, target, _transform.up);
 	}
 
+	void Camera::FirstPerson(Transform& transform)
+	{		
+		SetPosition(transform.position);
+
+		UpdateDirections(transform);
+	}
+	
+	void Camera::ThirdPerson(Transform& transform, glm::vec3 offset)
+	{
+		SetPosition(transform.position + offset);
+		
+		UpdateDirections(transform);
+	}
+
 	// --------------------------------------------
 	// Internal Functions
 
 	void Camera::DefaulValues()
 	{
-		//_transform.position = glm::vec3(0.0f, 0.0f, 5.0f);
 		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-		//glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-
-		//_cameraDirection = glm::normalize(_transform.position - cameraTarget);
-		//_transform.forward = glm::vec3(0, 0, -1);
-		//_transform.up = glm::vec3(0, 1, 0);
 
 		_view = glm::lookAt(_transform.position, cameraTarget, _transform.up);
 		_projection = glm::perspective(glm::radians(45.0f), 1366.0f / 768.0f, 0.1f, 100.0f);
+	}
+
+	void Camera::UpdateDirections(Transform& transform)
+	{
+		transform.forward = glm::normalize(glm::cross(glm::vec3(0, 1, 0), this->_transform.right));
+		transform.right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), transform.forward));
+		transform.up = glm::normalize(glm::cross(transform.forward, transform.right));
 	}
 
 	// ------------------------------------

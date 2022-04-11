@@ -8,7 +8,7 @@ namespace Engine
 	{
 		_roboBob = NULL;
 		_wall1 = NULL;
-		_wall2 = NULL;
+		_floor = NULL;
 		_box = NULL;
 
 		_cameraGame = NULL;
@@ -26,15 +26,20 @@ namespace Engine
 			delete _wall1;
 			_wall1 = NULL;
 		}
-		if (_wall2 != NULL)
+		if (_floor != NULL)
 		{
-			delete _wall2;
-			_wall2 = NULL;
+			delete _floor;
+			_floor = NULL;
 		}
 		if (_box != NULL)
 		{
 			delete _box;
 			_box = NULL;
+		}
+		if (_player != NULL)
+		{
+			delete _player;
+			_player = NULL;
 		}
 
 		if (_cameraGame != NULL)
@@ -67,14 +72,14 @@ namespace Engine
 		
 		// --------------------------------
 
-		_wall2 = new Sprite(GetRenderer());
-		_wall2->InitTexture();
-		_wall2->ImportTexture("res/camouflage.png");
-		_wall2->SetPosition(0, -1.2, 0);
-		_wall2->SetRotationX(90);
-		_wall2->SetScale(glm::vec3(10,10,10));
-		_wall2->SetStaticState(true);
-		GetCollisionManager()->AddNewObject(_wall2);
+		_floor = new Sprite(GetRenderer());
+		_floor->InitTexture();
+		_floor->ImportTexture("res/camouflage.png");
+		_floor->SetPosition(0, -1.2, 0);
+		_floor->SetRotationX(90);
+		_floor->SetScale(glm::vec3(10,10,10));
+		_floor->SetStaticState(true);
+		GetCollisionManager()->AddNewObject(_floor);
 		
 		// --------------------------------
 		
@@ -83,6 +88,14 @@ namespace Engine
 		_box->ImportTexture("res/crate1_diffuse.png");
 		_box->SetPosition(0, 0, 0);
 		GetCollisionManager()->AddNewObject(_box);
+
+		// --------------------------------
+
+		_player = new Sprite(GetRenderer());
+		_player->InitTexture();
+		_player->ImportTexture("res/BOB-ESPONJA-1-22.png");
+		_player->SetPosition(0, 0, 5);
+		//GetCollisionManager()->AddNewObject(_player);
 
 		// --------------------------------
 
@@ -102,44 +115,41 @@ namespace Engine
 
 	void Game::Update(float deltaTime)
 	{
-		_roboBob->Move(deltaTime);
+		//_roboBob->Move(deltaTime);
+
+		if (Input::GetKey(Keycode::W))
+		{
+			_player->SetPosition(_player->_transform.position - (_player->_transform.forward * (cameraSpeed * deltaTime)));
+		}
+		else if (Input::GetKey(Keycode::S))
+		{
+			_player->SetPosition(_player->_transform.position + (_player->_transform.forward * (cameraSpeed * deltaTime)));
+		}
+		if (Input::GetKey(Keycode::A))
+		{
+			_player->SetPosition(_player->_transform.position - (_player->_transform.right * (cameraSpeed * deltaTime)));
+		}
+		else if (Input::GetKey(Keycode::D))
+		{
+			_player->SetPosition(_player->_transform.position + (_player->_transform.right * (cameraSpeed * deltaTime)));
+		}
+
+		if (Input::GetKey(Keycode::SPACE))
+			cameraType = !cameraType;
+
+		if(!cameraType)
+			_cameraGame->FirstPerson(_player->_transform);
+		else
+			_cameraGame->ThirdPerson(_player->_transform, glm::vec3(0,1,1));
+		
+		_cameraGame->UpdateView();
 
 		GetCollisionManager()->CheckAllCollisions();
 
-		if (Input::GetKey(Keycode::I))
-		{
-			_cameraGame->Move(cameraSpeed * deltaTime, _cameraGame->GetFront());
-		}
-		if (Input::GetKey(Keycode::K))
-		{
-			_cameraGame->Move(-cameraSpeed * deltaTime, _cameraGame->GetFront());
-		}
-		if (Input::GetKey(Keycode::J))
-		{
-			_cameraGame->SetRotationY(_cameraGame->_transform.rotation.y - (-cameraSpeedRot * deltaTime));
-		}
-		if (Input::GetKey(Keycode::L))
-		{
-			_cameraGame->SetRotationY(_cameraGame->_transform.rotation.y + (-cameraSpeedRot * deltaTime));
-		}
-		if (Input::GetKey(Keycode::U))
-		{
-			_cameraGame->SetRotationX(_cameraGame->_transform.rotation.x - (-cameraSpeedRot * deltaTime));
-		}
-		if (Input::GetKey(Keycode::O))
-		{
-			_cameraGame->SetRotationX(_cameraGame->_transform.rotation.x + (-cameraSpeedRot * deltaTime));
-		}
-		if (Input::GetKey(Keycode::SPACE))
-		{
-			_cameraGame->SetRotationY(180);
-		}
-
-		_cameraGame->UpdateView();
-
 		_wall1->Draw();
-		_wall2->Draw();
+		_floor->Draw();
 		_box->Draw();
+		_player->Draw();
 	}
 
 	void Game::End()

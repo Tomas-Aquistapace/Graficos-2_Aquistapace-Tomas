@@ -33,7 +33,7 @@ namespace Engine
 			_vertexSize = sizeof(_quadVertex);
 
 			_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
-			_renderer->SetIndexBuffer(_vertexSize, _indexPos, _ebo);
+			_renderer->SetIndexBuffer(_vertexSize, _indexQuad, _ebo);
 			break;
 		}
 
@@ -53,7 +53,7 @@ namespace Engine
 			break;
 
 		case TypeOfShape::Quad:
-			_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_indexPos) / sizeof(float));
+			_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_indexQuad) / sizeof(float));
 			break;
 		}
 	}

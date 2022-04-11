@@ -72,12 +72,12 @@ namespace Engine
 			0,1,2,
 		};
 
-		unsigned int _indexPos[6] = {
+		unsigned int _indexQuad[6] = {
 			0,1,2,
 			3,2,0
 		};
 		
-		unsigned int _indexPos[36] = {
+		unsigned int _indexCube[36] = {
 			0, 1, 2,
 			2, 3, 0,
 			1, 5, 6,

@@ -22,9 +22,8 @@ namespace Engine
 		glm::mat4 _projection;
 		glm::mat4 _view;
 
-		// --------
-
 		void DefaulValues();
+		void UpdateDirections(Transform& transform);
 
 	public:
 		Camera();
@@ -37,6 +36,9 @@ namespace Engine
 		void SetCameraValues(CameraType type, float widht, float height, float near, float far);
 
 		void LookAt(glm::vec3 target);
+
+		void FirstPerson(Transform& transform);
+		void ThirdPerson(Transform& transform, glm::vec3 offset);
 
 		// --------------------------------
 		// Virtual Functions:
