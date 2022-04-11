@@ -22,12 +22,6 @@
     <Filter Include="Entity">
       <UniqueIdentifier>{4639e722-e1e3-47c5-af93-3120611eaa08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entity2D">
-      <UniqueIdentifier>{9c50b949-40e4-4865-af7d-f3b3eebb5c70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shape2D">
-      <UniqueIdentifier>{54254b23-86a9-4aff-b6d6-34914214f45a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{1264eabb-878c-42f7-806f-cd2af06f9099}</UniqueIdentifier>
     </Filter>
@@ -49,6 +43,12 @@
     <Filter Include="Animation">
       <UniqueIdentifier>{8fe896a6-d0c8-4813-935e-66b17d7bd264}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{ad6831da-1750-4e29-ad36-b1f01b69a6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Cube">
+      <UniqueIdentifier>{51e2d262-bc09-4bb9-9a98-381e0de71fbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -68,12 +68,6 @@
     </ClCompile>
     <ClCompile Include="src\Entity\Entity.cpp">
       <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entity2D\Entity2D.cpp">
-      <Filter>Entity2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Shape2D\Shape2D.cpp">
-      <Filter>Shape2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Input\Input.cpp">
       <Filter>Input</Filter>
@@ -95,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="src\TextureImporter\TextureImporter.cpp">
       <Filter>TextureImporter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Models\Cube\Cube.cpp">
+      <Filter>Models\Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,12 +116,6 @@
     <ClInclude Include="src\Entity\Entity.h">
       <Filter>Entity</Filter>
     </ClInclude>
-    <ClInclude Include="src\Entity2D\Entity2D.h">
-      <Filter>Entity2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shape2D\Shape2D.h">
-      <Filter>Shape2D</Filter>
-    </ClInclude>
     <ClInclude Include="src\Input\Input.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -148,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="src\TextureImporter\TextureImporter.h">
       <Filter>TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Models\Cube\Cube.h">
+      <Filter>Models\Cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

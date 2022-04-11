@@ -37,8 +37,8 @@ namespace Engine
 			return -1;
 		}
 
-		glEnable(GL_BLEND);
-		//glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_BLEND);
+		glEnable(GL_DEPTH_TEST);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
@@ -82,6 +82,25 @@ namespace Engine
 			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));
 			glEnableVertexAttribArray(2);
 		}
+
+		model = glGetUniformLocation(GetShader(), "model");
+	}
+
+	void Renderer::SetCubeVertexAttribPointer(unsigned int& model)
+	{
+		//Position
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
+		glEnableVertexAttribArray(0);
+
+		//Normal
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+
+		//Texture coordinates
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		glEnableVertexAttribArray(2);
+
+		glBindVertexArray(0);
 
 		model = glGetUniformLocation(GetShader(), "model");
 	}

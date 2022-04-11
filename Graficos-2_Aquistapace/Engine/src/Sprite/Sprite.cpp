@@ -31,7 +31,7 @@ namespace Engine
 			delete _textureImporter;
 	}
 
-	void Sprite::InitTexture()
+	void Sprite::InitTexture(const char* name)
 	{
 		_vertexSize = sizeof(_vertex);
 
@@ -39,10 +39,7 @@ namespace Engine
 		_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
 
 		_renderer->SetVertexAttribPointer(false, _modelUniform);
-	}
-	
-	void Sprite::ImportTexture(const char* name)
-	{
+
 		_textureImporter->ImportTexture(_renderer, name, _texture);
 	}
 

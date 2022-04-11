@@ -6,6 +6,7 @@
 #include "../Camera/Camera.h"
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
+#include "../Models/Cube/Cube.h"
 #include "../Animation/Animation.h"
 #include "../Input/Input.h"
 #include "../Time/Time.h"

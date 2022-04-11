@@ -40,6 +40,7 @@ namespace Engine
 		void SetVertexBuffer(int size, float* vertex, unsigned int &vao, unsigned int &vbo);
 		void SetIndexBuffer(int size, unsigned int* index, unsigned int &ebo);
 		void SetVertexAttribPointer(bool shape, unsigned int &model);
+		void SetCubeVertexAttribPointer(unsigned int &model);
 		void CreateShader();
 		void BindTexture(unsigned int& texture);
 		void DisableTexture();

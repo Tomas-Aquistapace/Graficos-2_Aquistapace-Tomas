@@ -7,11 +7,15 @@ namespace Engine
 	Game::Game(): GameBase()
 	{
 		_roboBob = NULL;
-		_wall1 = NULL;
 		_floor = NULL;
 		_box = NULL;
 
 		_cameraGame = NULL;
+
+		for (Cube* item : _walls)
+		{
+			item = NULL;
+		}
 	}
 
 	Game::~Game()
@@ -20,11 +24,6 @@ namespace Engine
 		{
 			delete _roboBob;
 			_roboBob = NULL;
-		}
-		if (_wall1 != NULL)
-		{
-			delete _wall1;
-			_wall1 = NULL;
 		}
 		if (_floor != NULL)
 		{
@@ -47,6 +46,15 @@ namespace Engine
 			delete _cameraGame;
 			_cameraGame = NULL;
 		}
+
+		for (Cube* item : _walls)
+		{
+			if (item != NULL)
+			{
+				delete item;
+				item = NULL;
+			}
+		}
 	}
 
 	void Game::Start()
@@ -60,52 +68,52 @@ namespace Engine
 
 		SetCameraInUse(_cameraGame);
 		SetFPSCamera(_cameraGame, 0.05f);
-
-		// --------------------------------
-		
-		_wall1 = new Sprite(GetRenderer());
-		_wall1->InitTexture();
-		_wall1->ImportTexture("res/wall.jpg");
-		_wall1->SetPosition(0, 1.2, 0);
-		_wall1->SetStaticState(true);
-		GetCollisionManager()->AddNewObject(_wall1);
 		
 		// --------------------------------
 
 		_floor = new Sprite(GetRenderer());
-		_floor->InitTexture();
-		_floor->ImportTexture("res/camouflage.png");
+		_floor->InitTexture("res/camouflage.png");
 		_floor->SetPosition(0, -1.2, 0);
 		_floor->SetRotationX(90);
 		_floor->SetScale(glm::vec3(10,10,10));
 		_floor->SetStaticState(true);
 		GetCollisionManager()->AddNewObject(_floor);
-		
-		// --------------------------------
-		
-		_box = new Sprite(GetRenderer());
-		_box->InitTexture();
-		_box->ImportTexture("res/crate1_diffuse.png");
-		_box->SetPosition(0, 0, 0);
-		GetCollisionManager()->AddNewObject(_box);
 
 		// --------------------------------
 
 		_player = new Sprite(GetRenderer());
-		_player->InitTexture();
-		_player->ImportTexture("res/BOB-ESPONJA-1-22.png");
+		_player->InitTexture("res/BOB-ESPONJA-1-22.png");
 		_player->SetPosition(0, 0, 5);
 		//GetCollisionManager()->AddNewObject(_player);
 
 		// --------------------------------
 
-		_roboBob = new Player(GetRenderer(), ivec2(9,5), 2);
-		_roboBob->GetAnimation()->AddFrame(0.1, 0, 7);
+		//_roboBob = new Player(GetRenderer(), ivec2(9,5), 2);
+		//_roboBob->GetAnimation()->AddFrame(0.1, 0, 7);
+		//
+		//_roboBob->InitTexture("res/character_robot_sheet.png");
+		//_roboBob->SetPosition(-1.8, 0, 0);
+		//GetCollisionManager()->AddNewObject(_roboBob);
 
-		_roboBob->InitTexture();
-		_roboBob->ImportTexture("res/character_robot_sheet.png");
-		_roboBob->SetPosition(-1.8, 0, 0);
-		GetCollisionManager()->AddNewObject(_roboBob);
+		// --------------------------------
+
+		_box = new Cube(GetRenderer());
+		_box->InitTexture("res/super-mario-question-block.png");
+		_box->SetPosition(0,0,0);
+		//GetCollisionManager()->AddNewObject(_box);
+
+		// --------------------------------
+
+		for (int i = 0; i < COUNT_WALLS; i++)
+		{
+			_walls[i] = new Cube(GetRenderer());
+			_walls[i]->InitTexture("res/wall.jpg");
+			_walls[i]->SetScale(2,3,2);
+		}
+		_walls[0]->SetPosition(4,0,4);
+		_walls[1]->SetPosition(4,0,-4);
+		_walls[2]->SetPosition(-4,0,4);
+		_walls[3]->SetPosition(-4,0,-4);
 	}
 	
 	void Game::Play()
@@ -144,9 +152,14 @@ namespace Engine
 		
 		_cameraGame->UpdateView();
 
+		_box->SetRotation(_box->_transform.rotation - (30 * deltaTime));
+
 		GetCollisionManager()->CheckAllCollisions();
 
-		_wall1->Draw();
+		for (Cube* item : _walls)
+		{
+			item->Draw();
+		}
 		_floor->Draw();
 		_box->Draw();
 		_player->Draw();

@@ -6,15 +6,19 @@
 
 namespace Engine
 {
+	const int COUNT_WALLS = 4;
+
 	class Game : public GameBase
 	{
 	private:
 		Player* _roboBob;
 		Sprite* _player;
-		Sprite* _wall1;
 		Sprite* _floor;
-		Sprite* _box;
 		Camera* _cameraGame;
+
+		Cube* _walls[COUNT_WALLS];
+
+		Cube* _box;
 
 		const float cameraSpeed = 2.25f;
 		const float cameraSpeedRot = 20;
