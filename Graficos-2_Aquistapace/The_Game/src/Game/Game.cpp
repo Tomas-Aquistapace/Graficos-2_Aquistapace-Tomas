@@ -67,7 +67,7 @@ namespace Engine
 		_cameraGame->SetRotationY(180);
 
 		SetCameraInUse(_cameraGame);
-		SetFPSCamera(_cameraGame, 0.05f);
+		ActivateFPSCamera(_cameraGame, 0.05f);
 		
 		// --------------------------------
 
@@ -81,8 +81,9 @@ namespace Engine
 
 		// --------------------------------
 
-		_player = new Sprite(GetRenderer());
+		_player = new Cube(GetRenderer());
 		_player->InitTexture("res/BOB-ESPONJA-1-22.png");
+		_player->SetScale(0.7f, 1, 0.7f);
 		_player->SetPosition(0, 0, 5);
 		//GetCollisionManager()->AddNewObject(_player);
 
@@ -123,13 +124,11 @@ namespace Engine
 
 	void Game::Update(float deltaTime)
 	{
-		//_roboBob->Move(deltaTime);
-
 		if (Input::GetKey(Keycode::W))
 		{
 			_player->SetPosition(_player->_transform.position - (_player->_transform.forward * (cameraSpeed * deltaTime)));
 		}
-		else if (Input::GetKey(Keycode::S))
+		if (Input::GetKey(Keycode::S))
 		{
 			_player->SetPosition(_player->_transform.position + (_player->_transform.forward * (cameraSpeed * deltaTime)));
 		}
@@ -137,24 +136,39 @@ namespace Engine
 		{
 			_player->SetPosition(_player->_transform.position - (_player->_transform.right * (cameraSpeed * deltaTime)));
 		}
-		else if (Input::GetKey(Keycode::D))
+		if (Input::GetKey(Keycode::D))
 		{
 			_player->SetPosition(_player->_transform.position + (_player->_transform.right * (cameraSpeed * deltaTime)));
 		}
 
-		if (Input::GetKey(Keycode::SPACE))
+
+		if (Input::GetKeyDown(Keycode::SPACE))
+		{
+			if (!cameraType)
+			{
+				DeactivateFPSCamera();
+			}
+			else
+			{
+				ActivateFPSCamera(_cameraGame, 0.05f);
+			}
+
 			cameraType = !cameraType;
+		}
+
 
 		if(!cameraType)
-			_cameraGame->FirstPerson(_player->_transform);
+			_cameraGame->FirstPerson(_player->GetEntity(), false);
 		else
-			_cameraGame->ThirdPerson(_player->_transform, glm::vec3(0,1,1));
+			_cameraGame->ThirdPerson(_player->GetEntity(), glm::vec3(4,3,4), true);
 		
-		_cameraGame->UpdateView();
+		//_cameraGame->UpdateView();
+
 
 		_box->SetRotation(_box->_transform.rotation - (30 * deltaTime));
 
-		GetCollisionManager()->CheckAllCollisions();
+
+		//GetCollisionManager()->CheckAllCollisions();
 
 		for (Cube* item : _walls)
 		{

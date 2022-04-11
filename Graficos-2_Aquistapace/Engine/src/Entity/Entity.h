@@ -43,6 +43,7 @@ namespace Engine
 
 	class EXPORT_API Entity 
 	{
+	private:
 		void SetPrebPosition(glm::vec3 position);
 		void SetPrebRotation(glm::vec3 rotation);
 		void SetPrebRotationX(float x);
@@ -55,6 +56,7 @@ namespace Engine
 
 		bool _isTrigger;
 		bool _isStatic;
+		bool _isHableToDraw;
 
 		void UpdateMatrix();
 		void UpdateTransformsData();
@@ -79,6 +81,8 @@ namespace Engine
 		void SetScale(float x, float y, float z);
 		void SetScale(glm::vec3 scale);
 
+		void HableToDraw(bool state);
+
 		void ReturnToPrevTransform();
 		void ReturnToPrevPosition();
 		void ReturnToPrevRotation();
@@ -93,6 +97,8 @@ namespace Engine
 		glm::vec3 GetFront();
 		glm::vec3 GetUp();
 		glm::vec3 GetRight();
+		Entity* GetEntity();
+		bool GetHableToDraw();
 
 		virtual void SetColor(ENTITY_COLOR color) = 0;
 		virtual void SetColor(float r, float g, float b) = 0;

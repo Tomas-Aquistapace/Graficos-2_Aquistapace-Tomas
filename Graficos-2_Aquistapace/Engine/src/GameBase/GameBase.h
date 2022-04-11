@@ -32,7 +32,8 @@ namespace Engine
 		virtual void Update(float deltatime) = 0;
 
 		void SetCameraInUse(Camera* camera);
-		void SetFPSCamera(Camera* camera, float sensitivity);
+		void ActivateFPSCamera(Camera* camera, float sensitivity);
+		void DeactivateFPSCamera();
 
 		Renderer* GetRenderer();
 		CollisionManager* GetCollisionManager();

@@ -101,13 +101,16 @@ namespace Engine
 
 	void Cube::Draw()
 	{
-		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+		if (GetHableToDraw())
+		{
+			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
-		_renderer->BindTexture(_texture);
+			_renderer->BindTexture(_texture);
 
-		_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
+			_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
 
-		_renderer->DisableTexture();
+			_renderer->DisableTexture();
+		}
 	}
 
 	// ------------------------------------

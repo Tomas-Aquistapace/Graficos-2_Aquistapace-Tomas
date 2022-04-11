@@ -12,12 +12,12 @@ namespace Engine
 	{
 	private:
 		Player* _roboBob;
-		Sprite* _player;
 		Sprite* _floor;
 		Camera* _cameraGame;
 
 		Cube* _walls[COUNT_WALLS];
 
+		Cube* _player;
 		Cube* _box;
 
 		const float cameraSpeed = 2.25f;

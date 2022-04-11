@@ -16,6 +16,7 @@ namespace Engine
 
 		_isTrigger = false;
 		_isStatic = false;
+		_isHableToDraw = true;
 	}
 
 	Entity::~Entity()
@@ -139,6 +140,11 @@ namespace Engine
 		UpdateMatrix();
 	}
 
+	void Entity::HableToDraw(bool state)
+	{
+		_isHableToDraw = state;
+	}
+
 	// --------------------------------
 	// Se utiliza para poder updatear la matris "model" que controla todas posiciones y datos de la figura
 	
@@ -215,6 +221,16 @@ namespace Engine
 	glm::vec3 Entity::GetRight()
 	{
 		return _transform.right;
+	}
+
+	Entity* Entity::GetEntity()
+	{
+		return this;
+	}
+
+	bool Entity::GetHableToDraw()
+	{
+		return _isHableToDraw;
 	}
 
 	// --------------------------------

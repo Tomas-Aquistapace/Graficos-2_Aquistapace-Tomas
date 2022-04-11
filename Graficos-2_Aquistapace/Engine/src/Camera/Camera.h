@@ -37,8 +37,8 @@ namespace Engine
 
 		void LookAt(glm::vec3 target);
 
-		void FirstPerson(Transform& transform);
-		void ThirdPerson(Transform& transform, glm::vec3 offset);
+		void FirstPerson(Entity* entity, bool drawEntity);
+		void ThirdPerson(Entity* entity, glm::vec3 offset, bool drawEntity);
 
 		// --------------------------------
 		// Virtual Functions:

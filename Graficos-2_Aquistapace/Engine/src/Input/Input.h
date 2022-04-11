@@ -137,9 +137,13 @@ namespace Engine
 		public:
 			static void SetWindow(GLFWwindow* window);
 			static bool GetKey(Keycode key);
+			static bool GetKeyDown(Keycode key);
 			static bool GetKeyUp(Keycode key);
 
-			static void SetFPSCamera(GLFWwindow* _window, Camera* camera, float sensitivity);
+			static void ActivateFPSCamera(GLFWwindow* _window, Camera* camera, float sensitivity);
+			static void DeactivateFPSCamera(GLFWwindow* _window);
+
+			static void CheckClearInputList();
 	};
 }
 

@@ -8,6 +8,7 @@ namespace Engine
 	static GLFWwindow* _window;
 	static Camera* _camera;
 
+	static void null_mouse_callback(GLFWwindow* window, double xpos, double ypos);
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 	void UpdateValuesFPS();
 
@@ -20,6 +21,11 @@ namespace Engine
 
 	float _sensitivity = 1.5f;
 
+
+	static int usedInputs = 0;
+	static const int _inputsListSize = 12;
+	static int _inputs[_inputsListSize];
+
 	// ---------------------------------
 
 	void Input::SetWindow(GLFWwindow* window)
@@ -31,13 +37,32 @@ namespace Engine
 	{
 		return (glfwGetKey(_window, key) == GLFW_PRESS);
 	}
+	
+	bool Input::GetKeyDown(Keycode key)
+	{
+		if (glfwGetKey(_window, key) == GLFW_PRESS)
+		{
+			for (int i = 0; i < _inputsListSize; i++)
+				if (key == _inputs[i])
+					return false;
+
+			_inputs[usedInputs] = key;
+			usedInputs++;
+
+			if (usedInputs >= _inputsListSize)
+				usedInputs = 0;
+
+			return true;
+		}
+		return false;
+	}
 
 	bool Input::GetKeyUp(Keycode key)
 	{
 		return (glfwGetKey(_window, key) == GLFW_RELEASE);
 	}
 
-	void Input::SetFPSCamera(GLFWwindow* _window, Camera* camera, float sensitivity)
+	void Input::ActivateFPSCamera(GLFWwindow* _window, Camera* camera, float sensitivity)
 	{
 		glfwSetCursorPosCallback(_window, mouse_callback);
 		glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -47,7 +72,25 @@ namespace Engine
 		_sensitivity = sensitivity;
 	}
 
+	void Input::DeactivateFPSCamera(GLFWwindow* _window)
+	{
+		glfwSetCursorPosCallback(_window, null_mouse_callback);
+		glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+
+	void Input::CheckClearInputList()
+	{
+		for (int i = 0; i < _inputsListSize; i++)
+		{
+			if (_inputs[i] != -1)
+				if (glfwGetKey(_window, _inputs[i]) == GLFW_RELEASE)
+					_inputs[i] = -1;
+		}
+	}
+
 	// ---------------------------------
+
+	void null_mouse_callback(GLFWwindow* window, double xpos, double ypos) { }
 
 	void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	{

@@ -53,6 +53,8 @@ namespace Engine
 			Time::DeltaTime(deltaTime);
 			Update(deltaTime); // --> Aca se utiliza un metodo virtual para poder dibujar los objetos del Game.cpp
 
+			Input::CheckClearInputList();
+
 			/* Swap front and back buffers */
 			_window->SwapBuffers();
 
@@ -75,9 +77,14 @@ namespace Engine
 		_renderer->SetCameraInUse(camera);
 	}
 
-	void GameBase::SetFPSCamera(Camera* camera, float sensitivity)
+	void GameBase::ActivateFPSCamera(Camera* camera, float sensitivity)
 	{
-		Input::SetFPSCamera(_window->ReturnWindow(), camera, sensitivity);
+		Input::ActivateFPSCamera(_window->ReturnWindow(), camera, sensitivity);
+	}
+
+	void GameBase::DeactivateFPSCamera()
+	{
+		Input::DeactivateFPSCamera(_window->ReturnWindow());
 	}
 
 	Renderer* GameBase::GetRenderer()

@@ -61,18 +61,29 @@ namespace Engine
 		_view = glm::lookAt(_transform.position, target, _transform.up);
 	}
 
-	void Camera::FirstPerson(Transform& transform)
-	{		
-		SetPosition(transform.position);
+	void Camera::FirstPerson(Entity* entity, bool drawEntity)
+	{
+		if (entity != NULL)
+		{
+			entity->HableToDraw(drawEntity);
 
-		UpdateDirections(transform);
+			SetPosition(entity->_transform.position);
+			UpdateDirections(entity->_transform);
+			UpdateView();
+		}
 	}
 	
-	void Camera::ThirdPerson(Transform& transform, glm::vec3 offset)
+	void Camera::ThirdPerson(Entity* entity, glm::vec3 offset, bool drawEntity)
 	{
-		SetPosition(transform.position + offset);
-		
-		UpdateDirections(transform);
+		if (entity != NULL)
+		{
+			entity->HableToDraw(drawEntity);
+
+			SetPosition(entity->_transform.position + offset);
+			SetRotation(0,0,0);
+			entity->SetRotation(entity->_transform.rotation);
+			LookAt(entity->_transform.position);
+		}
 	}
 
 	// --------------------------------------------
