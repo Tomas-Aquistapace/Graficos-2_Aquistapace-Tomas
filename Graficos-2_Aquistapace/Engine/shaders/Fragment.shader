@@ -4,7 +4,10 @@ uniform sampler2D ourTexture;
 //uniform vec3 lightColor;
 //uniform vec3 objectColor;
 
+uniform vec3 lightPos; // Light
+
 in vec2 TexCoord;
+in vec3 Normal; // LIght
 
 void main()
 {
