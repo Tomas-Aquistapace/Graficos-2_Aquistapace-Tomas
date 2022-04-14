@@ -20,6 +20,11 @@ namespace Engine
 		glm::vec3 rotation;
 	};
 
+	struct MyStruct
+	{
+
+	};
+
 	class EXPORT_API Light
 	{
 	private:

@@ -49,6 +49,9 @@
     <Filter Include="Models\Cube">
       <UniqueIdentifier>{51e2d262-bc09-4bb9-9a98-381e0de71fbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{52b5cde2-c6a4-4149-a542-b605b158052e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="src\Models\Cube\Cube.cpp">
       <Filter>Models\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\Light.cpp">
+      <Filter>Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="src\Models\Cube\Cube.h">
       <Filter>Models\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\Light.h">
+      <Filter>Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
