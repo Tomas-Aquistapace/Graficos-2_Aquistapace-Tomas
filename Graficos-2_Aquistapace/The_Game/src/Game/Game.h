@@ -11,7 +11,6 @@ namespace Engine
 	class Game : public GameBase
 	{
 	private:
-		Player* _roboBob;
 		Sprite* _floor;
 		Camera* _cameraGame;
 
@@ -19,6 +18,9 @@ namespace Engine
 
 		Cube* _player;
 		Cube* _box;
+
+		Cube* _LightCube;
+		Light* _actualLight;
 
 		const float cameraSpeed = 2.25f;
 		const float cameraSpeedRot = 20;

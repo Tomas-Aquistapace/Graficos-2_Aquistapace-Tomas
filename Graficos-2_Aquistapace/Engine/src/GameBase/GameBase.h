@@ -4,6 +4,7 @@
 #include "../Window/Window.h"
 #include "../Renderer/Renderer.h"
 #include "../Camera/Camera.h"
+#include "../Light/Light.h"
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
 #include "../Models/Cube/Cube.h"

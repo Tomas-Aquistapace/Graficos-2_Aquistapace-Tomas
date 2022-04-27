@@ -9,7 +9,18 @@
 
 namespace Engine
 {
-	enum class TypeOfShape {
+	struct LightData
+	{
+		glm::vec3 _lightColor;
+		glm::vec3 _position;
+
+		glm::vec3 _ambient;
+		glm::vec3 _diffuse;
+		glm::vec3 _specular;
+	};
+
+	enum class TypeOfShape
+	{
 		Triangle,
 		Quad,
 		Cube
@@ -46,6 +57,7 @@ namespace Engine
 		void DisableTexture();
 		void Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
+		void UpdateLight(LightData& data);
 
 		void StopShader();
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);

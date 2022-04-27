@@ -94,11 +94,11 @@ namespace Engine
 
 		//Normal
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
 
 		//Texture coordinates
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-		glEnableVertexAttribArray(2);
+		glEnableVertexAttribArray(3);
 
 		glBindVertexArray(0);
 
@@ -158,6 +158,24 @@ namespace Engine
 		glUseProgram(0);
 	}
 	
+	void Renderer::UpdateLight(LightData& data)
+	{
+		glUseProgram(_shader->GetShader());
+
+		glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "viewPos"), 1, &_camera->GetPosition()[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "lightPos"), 1, &data._position[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "lightColor"), 1, &data._lightColor[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "objectColor"), 1, &objectColor[0]);
+		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.position"), 1, &data._position[0]);
+		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.ambient"), 1, &data._ambient[0]);
+		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.diffuse"), 1, &data._diffuse[0]);
+		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.specular"), 1, &data._specular[0]);
+
+		glUseProgram(0);
+	}
+
 	void Renderer::StopShader()
 	{
 		if (_shader != NULL)

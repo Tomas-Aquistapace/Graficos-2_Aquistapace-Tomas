@@ -6,11 +6,13 @@ namespace Engine
 {
 	Game::Game(): GameBase()
 	{
-		_roboBob = NULL;
 		_floor = NULL;
 		_box = NULL;
 
 		_cameraGame = NULL;
+
+		_LightCube = NULL;
+		_actualLight = NULL;
 
 		for (Cube* item : _walls)
 		{
@@ -20,11 +22,6 @@ namespace Engine
 
 	Game::~Game()
 	{
-		if (_roboBob != NULL)
-		{
-			delete _roboBob;
-			_roboBob = NULL;
-		}
 		if (_floor != NULL)
 		{
 			delete _floor;
@@ -45,6 +42,17 @@ namespace Engine
 		{
 			delete _cameraGame;
 			_cameraGame = NULL;
+		}
+		
+		if (_actualLight != NULL)
+		{
+			delete _actualLight;
+			_actualLight = NULL;
+		}
+		if (_LightCube != NULL)
+		{
+			delete _LightCube;
+			_LightCube = NULL;
 		}
 
 		for (Cube* item : _walls)
@@ -71,30 +79,29 @@ namespace Engine
 		
 		// --------------------------------
 
+		_actualLight = new Light(GetRenderer(), glm::vec3(0,5,0), 1,1,1);
+
+		_LightCube = new Cube(GetRenderer());
+		_LightCube->InitTexture("res/camouflage.png");
+		_LightCube->SetPosition(0, 5, 0);
+		_LightCube->SetScale(glm::vec3(1,1,1));
+		
+		// --------------------------------
+
 		_floor = new Sprite(GetRenderer());
 		_floor->InitTexture("res/camouflage.png");
 		_floor->SetPosition(0, -1.2, 0);
 		_floor->SetRotationX(90);
-		_floor->SetScale(glm::vec3(10,10,10));
+		_floor->SetScale(glm::vec3(20,20,20));
 		_floor->SetStaticState(true);
 		GetCollisionManager()->AddNewObject(_floor);
 
-		// --------------------------------
 
 		_player = new Cube(GetRenderer());
 		_player->InitTexture("res/BOB-ESPONJA-1-22.png");
 		_player->SetScale(0.7f, 1, 0.7f);
 		_player->SetPosition(0, 0, 5);
 		//GetCollisionManager()->AddNewObject(_player);
-
-		// --------------------------------
-
-		//_roboBob = new Player(GetRenderer(), ivec2(9,5), 2);
-		//_roboBob->GetAnimation()->AddFrame(0.1, 0, 7);
-		//
-		//_roboBob->InitTexture("res/character_robot_sheet.png");
-		//_roboBob->SetPosition(-1.8, 0, 0);
-		//GetCollisionManager()->AddNewObject(_roboBob);
 
 		// --------------------------------
 
@@ -142,6 +149,9 @@ namespace Engine
 		}
 
 
+		_actualLight->SetPosition(_player->GetPosition());
+
+
 		if (Input::GetKeyDown(Keycode::SPACE))
 		{
 			if (!cameraType)
@@ -177,6 +187,7 @@ namespace Engine
 		_floor->Draw();
 		_box->Draw();
 		_player->Draw();
+		_actualLight->Draw();
 	}
 
 	void Game::End()
