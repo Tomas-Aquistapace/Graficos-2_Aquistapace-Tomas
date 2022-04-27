@@ -55,7 +55,9 @@ namespace Engine
 
     void Light::SetColor(glm::vec3 color)
     {
-        data._lightColor = color;
+        //data._lightColor = color * glm::vec3(0.5f);;
+        data._diffuse = color * glm::vec3(0.5f);
+        data._ambient = data._diffuse * glm::vec3(0.2f);
     }
 
     void Light::SetPosition(glm::vec3 position)

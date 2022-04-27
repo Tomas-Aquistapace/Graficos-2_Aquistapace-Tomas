@@ -11,7 +11,7 @@ namespace Engine
 
 		_cameraGame = NULL;
 
-		_LightCube = NULL;
+		_lightCube = NULL;
 		_actualLight = NULL;
 
 		for (Cube* item : _walls)
@@ -49,10 +49,10 @@ namespace Engine
 			delete _actualLight;
 			_actualLight = NULL;
 		}
-		if (_LightCube != NULL)
+		if (_lightCube != NULL)
 		{
-			delete _LightCube;
-			_LightCube = NULL;
+			delete _lightCube;
+			_lightCube = NULL;
 		}
 
 		for (Cube* item : _walls)
@@ -79,13 +79,15 @@ namespace Engine
 		
 		// --------------------------------
 
-		_actualLight = new Light(GetRenderer(), glm::vec3(0,5,0), 1,1,1);
+		_lightCube = new Cube(GetRenderer());
+		_lightCube->InitTexture("res/camouflage.png");
+		_lightCube->SetPosition(0, 10, 0);
+		// Pearl:
+		_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
-		_LightCube = new Cube(GetRenderer());
-		_LightCube->InitTexture("res/camouflage.png");
-		_LightCube->SetPosition(0, 5, 0);
-		_LightCube->SetScale(glm::vec3(1,1,1));
-		
+		_actualLight = new Light(GetRenderer(), glm::vec3(0,5,0), 1,1,1);
+		_actualLight->SetPosition(_lightCube->GetPosition());
+
 		// --------------------------------
 
 		_floor = new Sprite(GetRenderer());
@@ -149,7 +151,7 @@ namespace Engine
 		}
 
 
-		_actualLight->SetPosition(_player->GetPosition());
+		//_actualLight->SetPosition(_player->GetPosition());
 
 
 		if (Input::GetKeyDown(Keycode::SPACE))
@@ -188,6 +190,7 @@ namespace Engine
 		_box->Draw();
 		_player->Draw();
 		_actualLight->Draw();
+		_lightCube->Draw();
 	}
 
 	void Game::End()

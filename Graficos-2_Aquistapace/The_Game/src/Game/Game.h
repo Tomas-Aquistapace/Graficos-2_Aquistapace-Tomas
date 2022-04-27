@@ -19,7 +19,7 @@ namespace Engine
 		Cube* _player;
 		Cube* _box;
 
-		Cube* _LightCube;
+		Cube* _lightCube;
 		Light* _actualLight;
 
 		const float cameraSpeed = 2.25f;

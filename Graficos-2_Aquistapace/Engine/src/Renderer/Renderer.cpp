@@ -158,20 +158,28 @@ namespace Engine
 		glUseProgram(0);
 	}
 	
-	void Renderer::UpdateLight(LightData& data)
+	void Renderer::UpdateMaterial(MaterialData& material)
 	{
 		glUseProgram(_shader->GetShader());
 
-		glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.ambient"), 1, &material._ambient[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.diffuse"), 1, &material._diffuse[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1, &material._specular[0]);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "material.shininess"), material._shininess);
+
+		glUseProgram(0);
+	}
+
+	void Renderer::UpdateLight(LightData& light)
+	{
+		glUseProgram(_shader->GetShader());
 
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "viewPos"), 1, &_camera->GetPosition()[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "lightPos"), 1, &data._position[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "lightColor"), 1, &data._lightColor[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "objectColor"), 1, &objectColor[0]);
-		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.position"), 1, &data._position[0]);
-		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.ambient"), 1, &data._ambient[0]);
-		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.diffuse"), 1, &data._diffuse[0]);
-		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.specular"), 1, &data._specular[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.position"), 1, &light._position[0]);
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.ambient"), 1, &light._ambient[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.diffuse"), 1, &light._diffuse[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.specular"), 1, &light._specular[0]);
 
 		glUseProgram(0);
 	}

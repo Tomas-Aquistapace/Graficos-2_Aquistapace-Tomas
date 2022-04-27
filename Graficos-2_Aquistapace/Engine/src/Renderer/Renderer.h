@@ -19,6 +19,14 @@ namespace Engine
 		glm::vec3 _specular;
 	};
 
+	struct MaterialData
+	{
+		glm::vec3 _ambient;
+		glm::vec3 _diffuse;
+		glm::vec3 _specular;
+		float _shininess;
+	};
+
 	enum class TypeOfShape
 	{
 		Triangle,
@@ -56,8 +64,10 @@ namespace Engine
 		void BindTexture(unsigned int& texture);
 		void DisableTexture();
 		void Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
+		
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
-		void UpdateLight(LightData& data);
+		void UpdateMaterial(MaterialData& material);
+		void UpdateLight(LightData& light);
 
 		void StopShader();
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);

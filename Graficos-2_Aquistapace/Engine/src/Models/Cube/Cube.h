@@ -10,7 +10,6 @@ namespace Engine
 {
 	const int CUBE_VERTEX_COMPONENTS = 288;
 	const int CUBE_INDICES = 36;
-	//const int CUBE_VERTICES = 8;
 
 	class EXPORT_API Cube : public Entity
 	{
@@ -30,12 +29,15 @@ namespace Engine
 		TextureImporter* _textureImporter;
 		Renderer* _renderer;
 
+		MaterialData _material;
+
 	public:
 		Cube(Renderer* renderer);
 		~Cube();
 
 		void InitTexture(const char* name);
 		void Draw();
+		void SetMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess);
 		void SetColor(ENTITY_COLOR color);
 		void SetColor(float r, float g, float b);
 		void TriggerCollision(Entity* other);
