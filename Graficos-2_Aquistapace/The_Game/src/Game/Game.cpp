@@ -81,7 +81,7 @@ namespace Engine
 
 		_lightCube = new Cube(GetRenderer());
 		_lightCube->InitTexture("res/camouflage.png");
-		_lightCube->SetPosition(0, 10, 0);
+		_lightCube->SetPosition(-5, 10, 5);
 		// Pearl:
 		_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
@@ -110,6 +110,7 @@ namespace Engine
 		_box = new Cube(GetRenderer());
 		_box->InitTexture("res/super-mario-question-block.png");
 		_box->SetPosition(0,0,0);
+		_box->SetMaterial(glm::vec3(0.1745f, 0.01175f, 0.01175f), glm::vec3(0.61424f, 0.04136f,	0.04136f), glm::vec3(0.727811f, 0.626959f, 0.626959f), 0.6f);
 		//GetCollisionManager()->AddNewObject(_box);
 
 		// --------------------------------

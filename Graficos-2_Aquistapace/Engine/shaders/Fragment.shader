@@ -14,7 +14,6 @@ struct Material
 struct Light
 {
     vec3 position;
-	//vec3 color;
 
     vec3 ambient;
     vec3 diffuse;
@@ -32,8 +31,6 @@ in vec3 FragPos;
 uniform vec3 viewPos;
 uniform Light light;
 uniform Material material;
-
-//uniform vec3 objectColor;
 
 void main()
 {
