@@ -75,8 +75,8 @@ namespace Engine
 
 		_renderer = renderer;
 
-		_material._ambient = glm::vec3(0.31f, 0.2f, 1.0f);
-		_material._diffuse = glm::vec3(0.31f, 0.2f, 1.0f);
+		_material._ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+		_material._diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 		_material._specular = glm::vec3(0.5f, 0.5f, 0.5f);
 		_material._shininess = 32.0f;
 	}

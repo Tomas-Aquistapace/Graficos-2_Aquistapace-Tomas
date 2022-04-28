@@ -111,6 +111,8 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 
 		DefaultCameraIndex(_shader->GetShader());
+
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "material.diffuse"), 0);
 	}
 	
 	void Renderer::BindTexture(unsigned int& texture)
@@ -162,8 +164,6 @@ namespace Engine
 	{
 		glUseProgram(_shader->GetShader());
 
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.ambient"), 1, &material._ambient[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.diffuse"), 1, &material._diffuse[0]);
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1, &material._specular[0]);
 		glUniform1f(glGetUniformLocation(_shader->GetShader(), "material.shininess"), material._shininess);
 

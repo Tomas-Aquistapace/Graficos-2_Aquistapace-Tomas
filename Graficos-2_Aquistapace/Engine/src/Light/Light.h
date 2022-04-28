@@ -10,9 +10,9 @@ namespace Engine
 {
 	enum LightType
 	{
-		Ambient,
-		Specular,
-		Directional
+		Directional,
+		Point,
+		SpotLight
 	};
 
 	class EXPORT_API Light
