@@ -92,7 +92,7 @@ namespace Engine
 		}
 	}
 
-	void Cube::InitTexture(const char* name)
+	void Cube::InitTexture(const char* diffuse, const char* specular)
 	{
 		_vertexSize = sizeof(_vertex);
 
@@ -101,7 +101,12 @@ namespace Engine
 
 		_renderer->SetCubeVertexAttribPointer(_modelUniform);
 
-		_textureImporter->ImportTexture(_renderer, name, _texture);
+		_textureImporter->ImportTexture(_renderer, diffuse, _diffuseTexture);
+
+		if(specular != NULL)
+			_textureImporter->ImportTexture(_renderer, specular, _specularTexture);
+		else
+			_textureImporter->ImportTexture(_renderer, diffuse, _specularTexture);
 	}
 
 	void Cube::Draw()
@@ -111,7 +116,7 @@ namespace Engine
 			_renderer->UpdateMaterial(_material);
 			_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 
-			_renderer->BindTexture(_texture);
+			_renderer->BindTextures(_diffuseTexture, _specularTexture);
 
 			_renderer->Draw(_vao, _vbo, _ebo, _vertex, _vertexSize, sizeof(_index) / sizeof(float));
 

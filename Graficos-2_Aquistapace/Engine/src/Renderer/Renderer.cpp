@@ -120,6 +120,14 @@ namespace Engine
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
+	
+	void Renderer::BindTextures(unsigned int& texture1, unsigned int& texture2)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+	}
 
 	void Renderer::DisableTexture()
 	{
@@ -164,7 +172,8 @@ namespace Engine
 	{
 		glUseProgram(_shader->GetShader());
 
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1, &material._specular[0]);
+		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1, &material._specular[0]);
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1);
 		glUniform1f(glGetUniformLocation(_shader->GetShader(), "material.shininess"), material._shininess);
 
 		glUseProgram(0);

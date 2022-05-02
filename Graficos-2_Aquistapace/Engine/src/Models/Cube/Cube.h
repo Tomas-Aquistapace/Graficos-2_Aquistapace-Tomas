@@ -22,7 +22,8 @@ namespace Engine
 		unsigned int _ebo; // Index Buffer Obj
 
 		int _vertexSize;
-		unsigned int _texture;
+		unsigned int _diffuseTexture;
+		unsigned int _specularTexture;
 
 		unsigned int _modelUniform;
 
@@ -35,7 +36,7 @@ namespace Engine
 		Cube(Renderer* renderer);
 		~Cube();
 
-		void InitTexture(const char* name);
+		void InitTexture(const char* diffuse, const char* specular);
 		void Draw();
 		void SetMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess);
 		void SetColor(ENTITY_COLOR color);

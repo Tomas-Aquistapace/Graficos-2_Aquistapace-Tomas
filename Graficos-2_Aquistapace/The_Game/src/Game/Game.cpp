@@ -80,8 +80,8 @@ namespace Engine
 		// --------------------------------
 
 		_lightCube = new Cube(GetRenderer());
-		_lightCube->InitTexture("res/super-mario-question-block.png");
-		_lightCube->SetPosition(-5, 10, 5);
+		_lightCube->InitTexture("res/super-mario-question-block.png", NULL);
+		_lightCube->SetPosition(-6, 8, 6);
 		// Pearl:
 		//_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
@@ -100,7 +100,7 @@ namespace Engine
 
 
 		_player = new Cube(GetRenderer());
-		_player->InitTexture("res/BOB-ESPONJA-1-22.png");
+		_player->InitTexture("res/BOB-ESPONJA-1-22.png", NULL);
 		_player->SetScale(0.7f, 1, 0.7f);
 		_player->SetPosition(0, 0, 5);
 		//GetCollisionManager()->AddNewObject(_player);
@@ -108,7 +108,7 @@ namespace Engine
 		// --------------------------------
 
 		_box = new Cube(GetRenderer());
-		_box->InitTexture("res/container2.png");
+		_box->InitTexture("res/container2.png", "res/container2_specular.png");
 		_box->SetPosition(0,0,0);
 		//_box->SetMaterial(glm::vec3(0.1745f, 0.01175f, 0.01175f), glm::vec3(0.61424f, 0.04136f,	0.04136f), glm::vec3(0.727811f, 0.626959f, 0.626959f), 0.6f);
 		//GetCollisionManager()->AddNewObject(_box);
@@ -118,7 +118,7 @@ namespace Engine
 		for (int i = 0; i < COUNT_WALLS; i++)
 		{
 			_walls[i] = new Cube(GetRenderer());
-			_walls[i]->InitTexture("res/wall.jpg");
+			_walls[i]->InitTexture("res/wall.jpg", NULL);
 			_walls[i]->SetScale(2,3,2);
 		}
 		_walls[0]->SetPosition(4,0,4);

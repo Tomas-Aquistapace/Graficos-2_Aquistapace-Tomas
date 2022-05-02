@@ -62,6 +62,7 @@ namespace Engine
 		void SetCubeVertexAttribPointer(unsigned int &model);
 		void CreateShader();
 		void BindTexture(unsigned int& texture);
+		void BindTextures(unsigned int& texture1, unsigned int& texture2);
 		void DisableTexture();
 		void Draw(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, float* vertex, float vertexSize, int vertexCount);
 		
