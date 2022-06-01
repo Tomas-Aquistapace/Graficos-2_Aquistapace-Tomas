@@ -172,23 +172,39 @@ namespace Engine
 	{
 		glUseProgram(_shader->GetShader());
 
-		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1, &material._specular[0]);
 		glUniform1i(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1);
 		glUniform1f(glGetUniformLocation(_shader->GetShader(), "material.shininess"), material._shininess);
 
 		glUseProgram(0);
 	}
 
-	void Renderer::UpdateLight(LightData& light)
+	void Renderer::UpdateLight(LightData& light, int lightType)
 	{
 		glUseProgram(_shader->GetShader());
 
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "lightType"), lightType);
+		
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "viewPos"), 1, &_camera->GetPosition()[0]);
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.position"), 1, &light._position[0]);
-
+		
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.ambient"), 1, &light._ambient[0]);
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.diffuse"), 1, &light._diffuse[0]);
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.specular"), 1, &light._specular[0]);
+		
+		if (lightType == 0)
+		{
+			glUniform3fv(glGetUniformLocation(_shader->GetShader(), "directional.direction"), 1, &light._direction[0]);
+		}
+		else if (lightType == 1)
+		{
+			glUniform1f(glGetUniformLocation(_shader->GetShader(), "pointLight.constant"), light._constant);
+			glUniform1f(glGetUniformLocation(_shader->GetShader(), "pointLight.linear"), light._linear);
+			glUniform1f(glGetUniformLocation(_shader->GetShader(), "pointLight.quadratic"), light._quadratic);
+		}
+		else if (lightType == 2)
+		{
+
+		}
 
 		glUseProgram(0);
 	}
