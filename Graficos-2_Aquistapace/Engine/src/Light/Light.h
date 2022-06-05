@@ -33,9 +33,11 @@ namespace Engine
 
 		glm::vec3 GetColor();
 		glm::vec3 GetPosition();
+		glm::vec3 GetDirection();
 		glm::vec3 GetAmbient();
 		glm::vec3 GetDiffuse();
 		glm::vec3 GetSpecular();
+		int GetLightType();
 
 		void SetDirectionData(glm::vec3 direction);
 
@@ -43,6 +45,8 @@ namespace Engine
 
 		void SetColor(glm::vec3 color);
 		void SetPosition(glm::vec3 position);
+		void SetDirection(glm::vec3 direction);
+		void SetPointLight(float, float, float);
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);
 		void SetSpecular(glm::vec3 specular);

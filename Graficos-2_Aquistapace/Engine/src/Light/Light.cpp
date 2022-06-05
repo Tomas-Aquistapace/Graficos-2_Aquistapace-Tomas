@@ -50,27 +50,32 @@ namespace Engine
 
     glm::vec3 Light::GetColor()
     {
-        return data._lightColor;
+        return _data._lightColor;
     }
 
     glm::vec3 Light::GetPosition()
     {
-        return data._position;
+        return _data._position;
+    }
+
+    glm::vec3 Light::GetDirection()
+    {
+        return _data._direction;
     }
 
     glm::vec3 Light::GetAmbient()
     {
-        return data._ambient;
+        return _data._ambient;
     }
         
     glm::vec3 Light::GetDiffuse()
     {
-        return data._diffuse;
+        return _data._diffuse;
     }
 
     glm::vec3 Light::GetSpecular()
     {
-        return data._specular;
+        return _data._specular;
     }
 
     // ---------------------
@@ -99,27 +104,39 @@ namespace Engine
     void Light::SetColor(glm::vec3 color)
     {
         //data._lightColor = color * glm::vec3(0.5f);;
-        data._diffuse = color * glm::vec3(0.5f);
-        data._ambient = data._diffuse * glm::vec3(0.2f);
+        _data._diffuse = color * glm::vec3(0.5f);
+        _data._ambient = _data._diffuse * glm::vec3(0.2f);
     }
 
     void Light::SetPosition(glm::vec3 position)
     {
-        data._position = position;
+        _data._position = position;
+    }
+
+    void Light::SetDirection(glm::vec3 direction)
+    {
+        _data._direction = direction;
+    }
+
+    void Light::SetPointLight(float constant, float linear, float quadratic)
+    {
+        _data._constant = constant;
+        _data._linear = linear;
+        _data._quadratic = quadratic;
     }
 
     void Light::SetAmbient(glm::vec3 ambient)
     {
-        data._ambient = ambient;
+        _data._ambient = ambient;
     }
     
     void Light::SetDiffuse(glm::vec3 diffuse)
     {
-        data._diffuse = diffuse;
+        _data._diffuse = diffuse;
     }
     
     void Light::SetSpecular(glm::vec3 specular)
     {
-        data._specular = specular;
+        _data._specular = specular;
     }
 }

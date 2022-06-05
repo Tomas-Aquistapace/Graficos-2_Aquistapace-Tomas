@@ -17,6 +17,17 @@ namespace Engine
 		glm::vec3 _ambient;
 		glm::vec3 _diffuse;
 		glm::vec3 _specular;
+
+		// Directional
+		glm::vec3 _direction;
+
+		// Point
+		float _constant;
+		float _linear;
+		float _quadratic;
+
+		// SpotLight
+
 	};
 
 	struct DirectionLightData

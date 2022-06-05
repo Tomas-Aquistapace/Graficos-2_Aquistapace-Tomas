@@ -81,7 +81,7 @@ namespace Engine
 
 		_lightCube = new Cube(GetRenderer());
 		_lightCube->InitTexture("res/super-mario-question-block.png", NULL);
-		_lightCube->SetPosition(-6, 8, 6);
+		_lightCube->SetPosition(2, 1, -2);
 		// Pearl:
 		//_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 

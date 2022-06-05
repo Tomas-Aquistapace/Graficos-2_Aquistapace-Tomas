@@ -22,7 +22,7 @@ struct DirectionLight
 };
 
 in vec3 ourColor;
-in vec3 Normal; // Light
+in vec3 Normal;
 in vec3 FragPos;
 in vec2 TexCoords;
 
@@ -67,4 +67,32 @@ vec4 CalculateDirectionData(vec3 normal, vec3 viewDirection)
     vec3 specular = u_directionLight.specular * spec * vec3(texture(u_material.specular, TexCoords));
 
     return vec4((ambient + diffuse + specular), 1.0f);
+}
+
+vec3 CalculatePointLight(Material _material, Light _light, PointLight _pointLight, vec2 _texCoords, vec3 _normal)
+{
+    // ambient
+    vec3 ambient = _light.ambient * texture(_material.diffuse, _texCoords);
+
+    // diffuse 
+    vec3 norm = normalize(_normal);
+    vec3 lightDir = normalize(_light.position - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = _light.diffuse * diff * texture(_material.diffuse, _texCoords);
+
+    // specular
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), _material.shininess);
+    vec3 specular = _light.specular * spec * texture(_material.specular, _texCoords);
+
+    // attenuation
+    float distance = length(_light.position - FragPos);
+    float attenuation = 1.0 / (_pointLight.constant + _pointLight._linear * distance + _pointLight.quadratic * (distance * distance));
+
+    ambient *= attenuation;
+    diffuse *= attenuation;
+    specular *= attenuation;
+
+    return (ambient + diffuse + specular);
 }
