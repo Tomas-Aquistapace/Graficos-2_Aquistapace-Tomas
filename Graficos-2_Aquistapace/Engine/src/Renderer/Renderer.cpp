@@ -112,7 +112,8 @@ namespace Engine
 
 		DefaultCameraIndex(_shader->GetShader());
 
-		glUniform1i(glGetUniformLocation(_shader->GetShader(), "material.diffuse"), 0);
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "u_material.diffuse"), 0);
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "u_material.specular"), 1);
 	}
 	
 	void Renderer::BindTexture(unsigned int& texture)
@@ -173,22 +174,43 @@ namespace Engine
 		glUseProgram(_shader->GetShader());
 
 		//glUniform3fv(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1, &material._specular[0]);
-		glUniform1i(glGetUniformLocation(_shader->GetShader(), "material.specular"), 1);
-		glUniform1f(glGetUniformLocation(_shader->GetShader(), "material.shininess"), material._shininess);
+		//glUniform1i(glGetUniformLocation(_shader->GetShader(), "u_material.specular"), 1);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_material.shininess"), material._shininess);
 
 		glUseProgram(0);
 	}
 
-	void Renderer::UpdateLight(LightData& light)
+	//void Renderer::UpdateLight(LightData& light)
+	//{
+	//	glUseProgram(_shader->GetShader());
+	//
+	//	glUniform3fv(glGetUniformLocation(_shader->GetShader(), "viewPos"), 1, &_camera->GetPosition()[0]);
+	//	glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.position"), 1, &light._position[0]);
+	//
+	//	glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.ambient"), 1, &light._ambient[0]);
+	//	glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.diffuse"), 1, &light._diffuse[0]);
+	//	glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.specular"), 1, &light._specular[0]);
+	//
+	//	glUseProgram(0);
+	//}
+
+	void Renderer::UpdateDirectionalLight(DirectionLightData& light)
 	{
 		glUseProgram(_shader->GetShader());
 
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "viewPos"), 1, &_camera->GetPosition()[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.position"), 1, &light._position[0]);
+		glm::vec4 u_color = { 0.5f, 0.5f, 0.5f, 0.5f };
 
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.ambient"), 1, &light._ambient[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.diffuse"), 1, &light._diffuse[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "light.specular"), 1, &light._specular[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_color"), 1, &u_color[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_viewPos"), 1, &_camera->GetPosition()[0]);
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_directionLight.color"), 1, &light._color[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_directionLight.direction"), 1, &light._direction[0]);
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_directionLight.ambient"), 1, &light._ambient[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_directionLight.diffuse"), 1, &light._diffuse[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_directionLight.specular"), 1, &light._specular[0]);
+
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "u_directionLight.isActive"), light._isActive);
 
 		glUseProgram(0);
 	}

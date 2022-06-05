@@ -20,10 +20,13 @@ namespace Engine
 	private:		
 		// LightData existe en el Renderer para evitar una referencia cruzada al hacer las llamadas
 		LightData data;
+		DirectionLightData _directionLight;
 		Renderer* _renderer;
 
+		LightType _lightType;
+
 	public:
-		Light(Renderer* renderer, glm::vec3 position, float r, float g, float b);
+		Light(Renderer* renderer, float r, float g, float b, LightType type);
 		~Light();
 		
 		void Draw();
@@ -33,6 +36,10 @@ namespace Engine
 		glm::vec3 GetAmbient();
 		glm::vec3 GetDiffuse();
 		glm::vec3 GetSpecular();
+
+		void SetDirectionData(glm::vec3 direction);
+
+		void SetIsActive(bool state);
 
 		void SetColor(glm::vec3 color);
 		void SetPosition(glm::vec3 position);

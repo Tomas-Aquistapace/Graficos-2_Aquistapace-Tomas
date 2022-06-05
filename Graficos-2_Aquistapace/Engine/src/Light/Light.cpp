@@ -3,17 +3,37 @@
 
 namespace Engine
 {
-    Light::Light(Renderer* renderer, glm::vec3 position, float r, float g, float b)
+    Light::Light(Renderer* renderer, float r, float g, float b, LightType type)
     {
         _renderer = renderer;
 
-        data._position = position;
-        data._lightColor = { r, g, b };
-        
-        data._diffuse = data._lightColor * glm::vec3(0.5f);
-        data._ambient = data._diffuse * glm::vec3(0.2f);
+        _lightType = type;
 
-        data._specular = { 1.0f, 1.0f, 1.0f };
+        switch (_lightType)
+        {
+        case Engine::Directional:
+
+            _directionLight._color = { r, g, b };
+
+            _directionLight._direction = { 0, 0, 0 };
+
+
+            //_directionLight._diffuse = _directionLight._color * glm::vec3(0.5f);
+            //_directionLight._ambient = _directionLight._diffuse * glm::vec3(0.2f);
+            //_directionLight._specular = { 1.0f, 1.0f, 1.0f };
+            
+            _directionLight._diffuse = { 0.2f, 0.2f, 0.2f };
+            _directionLight._ambient = { 0.5f, 0.5f, 0.5f };
+            _directionLight._specular = { 1.0f, 1.0f, 1.0f };
+
+            _directionLight._isActive = (int)true;
+
+            break;
+        case Engine::Point:
+            break;
+        case Engine::SpotLight:
+            break;
+        }
     }
 
     Light::~Light()
@@ -23,7 +43,7 @@ namespace Engine
 
     void Light::Draw()
     {
-        _renderer->UpdateLight(data);
+        _renderer->UpdateDirectionalLight(_directionLight);
     }
 
     // -------------------
@@ -51,6 +71,29 @@ namespace Engine
     glm::vec3 Light::GetSpecular()
     {
         return data._specular;
+    }
+
+    // ---------------------
+
+    void Light::SetDirectionData(glm::vec3 direction)
+    {
+        _directionLight._direction = direction;
+    }
+
+    void Light::SetIsActive(bool state)
+    {
+        switch (_lightType)
+        {
+        case Engine::Directional:
+
+            _directionLight._isActive = (int)state;
+
+            break;
+        case Engine::Point:
+            break;
+        case Engine::SpotLight:
+            break;
+        }
     }
 
     void Light::SetColor(glm::vec3 color)

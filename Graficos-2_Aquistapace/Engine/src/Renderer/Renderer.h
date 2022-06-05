@@ -19,6 +19,18 @@ namespace Engine
 		glm::vec3 _specular;
 	};
 
+	struct DirectionLightData
+	{
+		glm::vec3 _color;
+		glm::vec3 _direction;
+
+		glm::vec3 _ambient;
+		glm::vec3 _diffuse;
+		glm::vec3 _specular;
+
+		int _isActive;
+	};
+
 	struct MaterialData
 	{
 		glm::vec3 _ambient;
@@ -68,7 +80,7 @@ namespace Engine
 		
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
 		void UpdateMaterial(MaterialData& material);
-		void UpdateLight(LightData& light);
+		void UpdateDirectionalLight(DirectionLightData& light);
 
 		void StopShader();
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);

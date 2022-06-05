@@ -85,8 +85,9 @@ namespace Engine
 		// Pearl:
 		//_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
-		_actualLight = new Light(GetRenderer(), glm::vec3(0,5,0), 1,1,1);
-		_actualLight->SetPosition(_lightCube->GetPosition());
+		_actualLight = new Light(GetRenderer(), 1,1,1, LightType::Directional);
+		_actualLight->SetDirectionData(glm::vec3(-0.2f, -1.0f, -0.3f));
+		//_actualLight->SetPosition(_lightCube->GetPosition());
 
 		// --------------------------------
 
