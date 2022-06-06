@@ -8,45 +8,26 @@
 
 namespace Engine
 {
-	enum LightType
-	{
-		Directional,
-		Point,
-		SpotLight
-	};
-
 	class EXPORT_API Light
 	{
-	private:		
-		// LightData existe en el Renderer para evitar una referencia cruzada al hacer las llamadas
-		LightData data;
-		DirectionLightData _directionLight;
+	protected:
+		LightData _data;
 		Renderer* _renderer;
 
-		LightType _lightType;
-
 	public:
-		Light(Renderer* renderer, float r, float g, float b, LightType type);
+		Light(Renderer* renderer, float r, float g, float b);
 		~Light();
 		
-		void Draw();
+		virtual void Draw() = 0;
 
 		glm::vec3 GetColor();
-		glm::vec3 GetPosition();
-		glm::vec3 GetDirection();
 		glm::vec3 GetAmbient();
 		glm::vec3 GetDiffuse();
 		glm::vec3 GetSpecular();
-		int GetLightType();
-
-		void SetDirectionData(glm::vec3 direction);
 
 		void SetIsActive(bool state);
 
 		void SetColor(glm::vec3 color);
-		void SetPosition(glm::vec3 position);
-		void SetDirection(glm::vec3 direction);
-		void SetPointLight(float, float, float);
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);
 		void SetSpecular(glm::vec3 specular);

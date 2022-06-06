@@ -5,6 +5,8 @@
 #include "../Renderer/Renderer.h"
 #include "../Camera/Camera.h"
 #include "../Light/Light.h"
+#include "../Light/DirectionalLight.h"
+#include "../Light/PointLight.h"
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
 #include "../Models/Cube/Cube.h"

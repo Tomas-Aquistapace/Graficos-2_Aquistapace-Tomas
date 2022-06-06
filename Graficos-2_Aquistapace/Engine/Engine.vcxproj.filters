@@ -99,6 +99,12 @@
     <ClCompile Include="src\Light\Light.cpp">
       <Filter>Light</Filter>
     </ClCompile>
+    <ClCompile Include="src\Light\DirectionalLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\PointLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Window.h">
@@ -150,6 +156,12 @@
       <Filter>Models\Cube</Filter>
     </ClInclude>
     <ClInclude Include="src\Light\Light.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\DirectionalLight.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\PointLight.h">
       <Filter>Light</Filter>
     </ClInclude>
   </ItemGroup>

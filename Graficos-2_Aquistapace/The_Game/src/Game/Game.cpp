@@ -12,7 +12,8 @@ namespace Engine
 		_cameraGame = NULL;
 
 		_lightCube = NULL;
-		_actualLight = NULL;
+		_directionalLight = NULL;
+		_pointLight = NULL;
 
 		for (Cube* item : _walls)
 		{
@@ -44,11 +45,17 @@ namespace Engine
 			_cameraGame = NULL;
 		}
 		
-		if (_actualLight != NULL)
+		if (_directionalLight != NULL)
 		{
-			delete _actualLight;
-			_actualLight = NULL;
+			delete _directionalLight;
+			_directionalLight = NULL;
 		}
+		if (_pointLight != NULL)
+		{
+			delete _pointLight;
+			_pointLight = NULL;
+		}
+
 		if (_lightCube != NULL)
 		{
 			delete _lightCube;
@@ -85,8 +92,10 @@ namespace Engine
 		// Pearl:
 		//_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
-		_actualLight = new Light(GetRenderer(), 1,1,1, LightType::Directional);
-		_actualLight->SetDirectionData(glm::vec3(-0.2f, -1.0f, -0.3f));
+		_directionalLight = new DirectionalLight(GetRenderer(), 1,1,1, glm::vec3(-0.2f, -1.0f, -0.3f));
+
+		_pointLight = new PointLight(GetRenderer(), 1, 1, 1, glm::vec3(-2, 1, 2));
+
 		//_actualLight->SetPosition(_lightCube->GetPosition());
 
 		// --------------------------------
@@ -191,8 +200,10 @@ namespace Engine
 		_floor->Draw();
 		_box->Draw();
 		_player->Draw();
-		_actualLight->Draw();
-		_lightCube->Draw();
+
+		//_directionalLight->Draw();
+		_pointLight->Draw();
+		//_lightCube->Draw();
 	}
 
 	void Game::End()

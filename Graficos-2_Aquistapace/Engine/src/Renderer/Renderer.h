@@ -11,35 +11,27 @@ namespace Engine
 {
 	struct LightData
 	{
-		glm::vec3 _lightColor;
-		glm::vec3 _position;
-
-		glm::vec3 _ambient;
-		glm::vec3 _diffuse;
-		glm::vec3 _specular;
-
-		// Directional
-		glm::vec3 _direction;
-
-		// Point
-		float _constant;
-		float _linear;
-		float _quadratic;
-
-		// SpotLight
-
-	};
-
-	struct DirectionLightData
-	{
 		glm::vec3 _color;
-		glm::vec3 _direction;
 
 		glm::vec3 _ambient;
 		glm::vec3 _diffuse;
 		glm::vec3 _specular;
 
 		int _isActive;
+	};
+
+	struct DirectionLightData
+	{
+		glm::vec3 _direction;
+	};
+
+	struct PointLightData
+	{
+		glm::vec3 _position;
+
+		float _constant;
+		float _linear;
+		float _quadratic;
 	};
 
 	struct MaterialData
@@ -91,7 +83,8 @@ namespace Engine
 		
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
 		void UpdateMaterial(MaterialData& material);
-		void UpdateDirectionalLight(DirectionLightData& light);
+		void UpdateDirectionalLight(LightData& light, DirectionLightData& directional);
+		void UpdatePointLight(LightData& light, PointLightData& point);
 
 		void StopShader();
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);

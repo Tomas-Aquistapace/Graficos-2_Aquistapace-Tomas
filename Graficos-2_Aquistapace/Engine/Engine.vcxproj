@@ -163,7 +163,9 @@
     <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\GameBase\GameBase.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Light\DirectionalLight.cpp" />
     <ClCompile Include="src\Light\Light.cpp" />
+    <ClCompile Include="src\Light\PointLight.cpp" />
     <ClCompile Include="src\Models\Cube\Cube.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
@@ -181,7 +183,9 @@
     <ClInclude Include="src\Export\Export.h" />
     <ClInclude Include="src\GameBase\GameBase.h" />
     <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Light\DirectionalLight.h" />
     <ClInclude Include="src\Light\Light.h" />
+    <ClInclude Include="src\Light\PointLight.h" />
     <ClInclude Include="src\Models\Cube\Cube.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
