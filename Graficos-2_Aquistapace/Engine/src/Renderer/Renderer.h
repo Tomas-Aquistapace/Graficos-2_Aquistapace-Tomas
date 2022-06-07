@@ -34,6 +34,19 @@ namespace Engine
 		float _quadratic;
 	};
 
+	struct SpotLightData
+	{
+		glm::vec3 _position;
+		glm::vec3 _direction;
+
+		float _cutOff;
+		float _outerCutOff;
+
+		float _constant;
+		float _linear;
+		float _quadratic;
+	};
+
 	struct MaterialData
 	{
 		glm::vec3 _ambient;
@@ -85,6 +98,7 @@ namespace Engine
 		void UpdateMaterial(MaterialData& material);
 		void UpdateDirectionalLight(LightData& light, DirectionLightData& directional);
 		void UpdatePointLight(LightData& light, PointLightData& point);
+		void UpdateSpotLight(LightData& light, SpotLightData& spot);
 
 		void StopShader();
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);

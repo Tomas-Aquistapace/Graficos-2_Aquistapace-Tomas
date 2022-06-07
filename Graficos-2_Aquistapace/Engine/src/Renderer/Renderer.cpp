@@ -226,6 +226,34 @@ namespace Engine
 		glUseProgram(0);
 	}
 
+	void Renderer::UpdateSpotLight(LightData& light, SpotLightData& spot)
+	{
+		glUseProgram(_shader->GetShader());
+
+		glm::vec4 u_color = { 0.5f, 0.5f, 0.5f, 0.5f };
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_color"), 1, &u_color[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_viewPos"), 1, &_camera->GetPosition()[0]);
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_spotLight.color"), 1, &light._color[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_spotLight.position"), 1, &spot._position[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_spotLight.direction"), 1, &spot._direction[0]);
+
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_spotLight.cutOff"), spot._cutOff);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_spotLight.outerCutOff"), spot._outerCutOff);
+
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_spotLight.constant"), spot._constant);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_spotLight.linear"), spot._linear);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_spotLight.quadratic"), spot._quadratic);
+
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_spotLight.ambient"), 1, &light._ambient[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_spotLight.diffuse"), 1, &light._diffuse[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_spotLight.specular"), 1, &light._specular[0]);
+
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "u_spotLight.isActive"), light._isActive);
+
+		glUseProgram(0);
+	}
 
 	void Renderer::StopShader()
 	{

@@ -14,6 +14,7 @@ namespace Engine
 		_lightCube = NULL;
 		_directionalLight = NULL;
 		_pointLight = NULL;
+		_spotLight = NULL;
 
 		for (Cube* item : _walls)
 		{
@@ -55,6 +56,11 @@ namespace Engine
 			delete _pointLight;
 			_pointLight = NULL;
 		}
+		if (_spotLight != NULL)
+		{
+			delete _spotLight;
+			_spotLight = NULL;
+		}
 
 		if (_lightCube != NULL)
 		{
@@ -92,11 +98,12 @@ namespace Engine
 		// Pearl:
 		//_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
-		_directionalLight = new DirectionalLight(GetRenderer(), 1,1,1, glm::vec3(-0.2f, -1.0f, -0.3f));
+		//_directionalLight = new DirectionalLight(GetRenderer(), 1,1,1, glm::vec3(-0.2f, -1.0f, -0.3f));
 
-		_pointLight = new PointLight(GetRenderer(), 1, 1, 1, glm::vec3(-2, 1, 2));
+		//_pointLight = new PointLight(GetRenderer(), 1, 1, 1, glm::vec3(-2, 1, 2));
 
-		//_actualLight->SetPosition(_lightCube->GetPosition());
+		_spotLight = new SpotLight(GetRenderer(), 1, 1, 1, _cameraGame->GetPosition(), _cameraGame->GetFront());
+		_spotLight->SetSpotValues(0.01f, 0.3f, 0.1f);
 
 		// --------------------------------
 
@@ -161,10 +168,6 @@ namespace Engine
 			_player->SetPosition(_player->_transform.position + (_player->_transform.right * (cameraSpeed * deltaTime)));
 		}
 
-
-		//_actualLight->SetPosition(_player->GetPosition());
-
-
 		if (Input::GetKeyDown(Keycode::SPACE))
 		{
 			if (!cameraType)
@@ -179,7 +182,6 @@ namespace Engine
 			cameraType = !cameraType;
 		}
 
-
 		if(!cameraType)
 			_cameraGame->FirstPerson(_player->GetEntity(), false);
 		else
@@ -187,11 +189,10 @@ namespace Engine
 		
 		//_cameraGame->UpdateView();
 
-
 		_box->SetRotation(_box->_transform.rotation - (30 * deltaTime));
 
-
-		//GetCollisionManager()->CheckAllCollisions();
+		_spotLight->SetPosition(_cameraGame->GetPosition());
+		_spotLight->SetDirection(_cameraGame->GetFront());
 
 		for (Cube* item : _walls)
 		{
@@ -202,7 +203,8 @@ namespace Engine
 		_player->Draw();
 
 		//_directionalLight->Draw();
-		_pointLight->Draw();
+		//_pointLight->Draw();
+		_spotLight->Draw();
 		//_lightCube->Draw();
 	}
 

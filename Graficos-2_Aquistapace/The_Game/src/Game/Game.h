@@ -22,6 +22,7 @@ namespace Engine
 		Cube* _lightCube;
 		DirectionalLight* _directionalLight;
 		PointLight* _pointLight;
+		SpotLight* _spotLight;
 
 		const float cameraSpeed = 2.25f;
 		const float cameraSpeedRot = 20;

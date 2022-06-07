@@ -105,6 +105,9 @@
     <ClCompile Include="src\Light\PointLight.cpp">
       <Filter>Light</Filter>
     </ClCompile>
+    <ClCompile Include="src\Light\SpotLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Window.h">
@@ -162,6 +165,9 @@
       <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="src\Light\PointLight.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\SpotLight.h">
       <Filter>Light</Filter>
     </ClInclude>
   </ItemGroup>
