@@ -4,10 +4,7 @@
 #include "../Window/Window.h"
 #include "../Renderer/Renderer.h"
 #include "../Camera/Camera.h"
-#include "../Light/Light.h"
-#include "../Light/DirectionalLight.h"
-#include "../Light/PointLight.h"
-#include "../Light/SpotLight.h"
+#include "../Light/LightManager.h"
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
 #include "../Models/Cube/Cube.h"
@@ -24,6 +21,7 @@ namespace Engine
 		Renderer* _renderer;
 		Window* _window;
 		CollisionManager* _collisionManager;
+		LightManager* _lightManager;
 
 	public:
 		GameBase();
@@ -41,6 +39,7 @@ namespace Engine
 
 		Renderer* GetRenderer();
 		CollisionManager* GetCollisionManager();
+		LightManager* GetLightManager();
 	};
 }
 

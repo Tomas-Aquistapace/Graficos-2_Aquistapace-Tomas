@@ -12,7 +12,7 @@ namespace Engine
 
 	}
 
-	void DirectionalLight::Draw()
+	void DirectionalLight::Draw(int i)
 	{
 		_renderer->UpdateDirectionalLight(_data, _directionData);
 	}

@@ -56,6 +56,8 @@ struct SpotLight
     int isActive;
 };
 
+#define NR_INDIVIDUALS_LIGHTS 4
+
 in vec3 ourColor;
 in vec3 Normal;
 in vec3 FragPos;
@@ -65,39 +67,41 @@ uniform vec4 u_color;
 
 uniform vec3 u_viewPos;
 uniform DirectionLight u_directionLight;
-uniform PointLight u_pointLight;
-uniform SpotLight u_spotLight;
+uniform PointLight u_pointLight[NR_INDIVIDUALS_LIGHTS];
+uniform SpotLight u_spotLight[NR_INDIVIDUALS_LIGHTS];
 uniform Material u_material;
 
 vec4 CalculateDirectionData(vec3 normal, vec3 viewDirection);
-vec4 CalculatePointLight(vec3 normal, vec3 viewDirection);
-vec4 CalculateSpotLight(vec3 normal, vec3 viewDirection);
+vec4 CalculatePointLight(PointLight pointLight, vec3 normal, vec3 viewDirection);
+vec4 CalculateSpotLight(SpotLight spotLight, vec3 normal, vec3 viewDirection);
 
 void main()
 {
-    vec4 resultColor = u_color;
+    vec4 resultColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);
     vec3 normal = normalize(Normal);
     vec3 viewDirection = normalize(u_viewPos - FragPos);
 
     if (u_directionLight.isActive != 0)
     {
-        resultColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-
         resultColor += CalculateDirectionData(normal, viewDirection);
-    }    
-    if (u_pointLight.isActive != 0)
-    {
-        resultColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-
-        resultColor += CalculatePointLight(normal, viewDirection);
-    }    
-    if (u_spotLight.isActive != 0)
-    {
-        resultColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-
-        resultColor += CalculateSpotLight(normal, viewDirection);
     }
-    
+
+    for (int i = 0; i < NR_INDIVIDUALS_LIGHTS; i++)
+    {
+        if (u_pointLight[i].isActive != 0)
+        {
+            resultColor += CalculatePointLight(u_pointLight[i], normal, viewDirection);
+        }
+    }
+
+    for (int i = 0; i < NR_INDIVIDUALS_LIGHTS; i++)
+    {
+        if (u_spotLight[i].isActive != 0)
+        {
+            resultColor += CalculateSpotLight(u_spotLight[i], normal, viewDirection);
+        }
+    }
+
     FragColor = resultColor;
 }
 
@@ -119,26 +123,26 @@ vec4 CalculateDirectionData(vec3 normal, vec3 viewDirection)
     return vec4((ambient + diffuse + specular), 1.0f);
 }
 
-vec4 CalculatePointLight(vec3 normal, vec3 viewDirection)
+vec4 CalculatePointLight(PointLight pointLight, vec3 normal, vec3 viewDirection)
 {
     // ambient
-    vec3 ambient = u_pointLight.ambient * vec3(texture(u_material.diffuse, TexCoords));
+    vec3 ambient = pointLight.ambient * vec3(texture(u_material.diffuse, TexCoords));
 
     // diffuse 
     //vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(u_pointLight.position - FragPos);
+    vec3 lightDir = normalize(pointLight.position - FragPos);
     float diff = max(dot(normal, lightDir), 0.0);
-    vec3 diffuse = u_pointLight.diffuse * diff * vec3(texture(u_material.diffuse, TexCoords));
+    vec3 diffuse = pointLight.diffuse * diff * vec3(texture(u_material.diffuse, TexCoords));
 
     // specular
     //vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDirection, reflectDir), 0.0), u_material.shininess);
-    vec3 specular = u_pointLight.specular * spec * vec3(texture(u_material.specular, TexCoords));
+    vec3 specular = pointLight.specular * spec * vec3(texture(u_material.specular, TexCoords));
 
     // attenuation
-    float distance = length(u_pointLight.position - FragPos);
-    float attenuation = 1.0 / (u_pointLight.constant + u_pointLight.linear * distance + u_pointLight.quadratic * (distance * distance));
+    float distance = length(pointLight.position - FragPos);
+    float attenuation = 1.0 / (pointLight.constant + pointLight.linear * distance + pointLight.quadratic * (distance * distance));
 
     ambient *= attenuation;
     diffuse *= attenuation;
@@ -147,33 +151,33 @@ vec4 CalculatePointLight(vec3 normal, vec3 viewDirection)
     return vec4((ambient + diffuse + specular), 1.0f);
 }
 
-vec4 CalculateSpotLight(vec3 normal, vec3 viewDirection)
+vec4 CalculateSpotLight(SpotLight spotLight, vec3 normal, vec3 viewDirection)
 {
     // ambient
-    vec3 ambient = u_spotLight.ambient * vec3(texture(u_material.diffuse, TexCoords));
+    vec3 ambient = spotLight.ambient * vec3(texture(u_material.diffuse, TexCoords));
 
     // diffuse 
     //vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(u_spotLight.position - FragPos);
+    vec3 lightDir = normalize(spotLight.position - FragPos);
     float diff = max(dot(normal, lightDir), 0.0);
-    vec3 diffuse = u_spotLight.diffuse * diff * vec3(texture(u_material.diffuse, TexCoords));
+    vec3 diffuse = spotLight.diffuse * diff * vec3(texture(u_material.diffuse, TexCoords));
 
     // specular
     //vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDirection, reflectDir), 0.0), u_material.shininess);
-    vec3 specular = u_spotLight.specular * spec * vec3(texture(u_material.specular, TexCoords));
+    vec3 specular = spotLight.specular * spec * vec3(texture(u_material.specular, TexCoords));
 
     // spotlight (soft edges)
-    float theta = dot(lightDir, normalize(-u_spotLight.direction));
-    float epsilon = (u_spotLight.cutOff - u_spotLight.outerCutOff);
-    float intensity = clamp((theta - u_spotLight.outerCutOff) / epsilon, 0.0, 1.0);
+    float theta = dot(lightDir, normalize(-spotLight.direction));
+    float epsilon = (spotLight.cutOff - spotLight.outerCutOff);
+    float intensity = clamp((theta - spotLight.outerCutOff) / epsilon, 0.0, 1.0);
     diffuse *= intensity;
     specular *= intensity;
 
     // attenuation
-    float distance = length(u_spotLight.position - FragPos);
-    float attenuation = 1.0 / (u_spotLight.constant + u_spotLight.linear * distance + u_spotLight.quadratic * (distance * distance));
+    float distance = length(spotLight.position - FragPos);
+    float attenuation = 1.0 / (spotLight.constant + spotLight.linear * distance + spotLight.quadratic * (distance * distance));
     ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;

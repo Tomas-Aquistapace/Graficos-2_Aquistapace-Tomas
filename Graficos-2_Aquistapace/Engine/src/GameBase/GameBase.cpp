@@ -14,6 +14,7 @@ namespace Engine
 		_window = new Window();
 		_renderer = new Renderer();
 		_collisionManager = new CollisionManager();
+		_lightManager = new LightManager();
 	}
 
 	GameBase::~GameBase()
@@ -24,6 +25,8 @@ namespace Engine
 			delete _renderer;
 		if (_collisionManager != NULL)
 			delete _collisionManager;
+		if (_lightManager != NULL)
+			delete _lightManager;
 	}
 
 	int GameBase::StartEngine(int width, int height, const char* windowName) 
@@ -95,5 +98,10 @@ namespace Engine
 	CollisionManager* GameBase::GetCollisionManager()
 	{
 		return _collisionManager;
+	}
+	
+	LightManager* GameBase::GetLightManager()
+	{
+		return _lightManager;
 	}
 }

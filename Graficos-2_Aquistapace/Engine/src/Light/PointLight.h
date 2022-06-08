@@ -14,7 +14,7 @@ namespace Engine
 		PointLight(Renderer* renderer, float r, float g, float b, glm::vec3 position);
 		~PointLight();
 
-		void Draw() override;
+		void Draw(int i) override;
 
 		glm::vec3 GetPosition();
 

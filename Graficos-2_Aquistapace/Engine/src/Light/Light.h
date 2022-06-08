@@ -18,7 +18,7 @@ namespace Engine
 		Light(Renderer* renderer, float r, float g, float b);
 		~Light();
 		
-		virtual void Draw() = 0;
+		virtual void Draw(int i) = 0;
 
 		glm::vec3 GetColor();
 		glm::vec3 GetAmbient();

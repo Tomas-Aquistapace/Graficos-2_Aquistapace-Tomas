@@ -16,9 +16,9 @@ namespace Engine
 
 	}
 
-	void PointLight::Draw()
+	void PointLight::Draw(int i)
 	{
-		_renderer->UpdatePointLight(_data, _pointData);
+		_renderer->UpdatePointLight(_data, _pointData, i);
 	}
 
 	glm::vec3 PointLight::GetPosition() 

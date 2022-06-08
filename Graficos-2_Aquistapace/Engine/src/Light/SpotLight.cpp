@@ -20,9 +20,9 @@ namespace Engine
 
 	}
 
-	void SpotLight::Draw()
+	void SpotLight::Draw(int i)
 	{
-		_renderer->UpdateSpotLight(_data, _spotData);
+		_renderer->UpdateSpotLight(_data, _spotData, i);
 	}
 
 	glm::vec3 SpotLight::GetPosition()

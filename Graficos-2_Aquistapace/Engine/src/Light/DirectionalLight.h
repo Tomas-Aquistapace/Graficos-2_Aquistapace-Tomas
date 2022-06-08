@@ -14,7 +14,7 @@ namespace Engine
 		DirectionalLight(Renderer* renderer, float r, float g, float b, glm::vec3 direction);
 		~DirectionalLight();
 
-		void Draw() override;
+		void Draw(int i) override;
 
 		glm::vec3 GetDirection();
 

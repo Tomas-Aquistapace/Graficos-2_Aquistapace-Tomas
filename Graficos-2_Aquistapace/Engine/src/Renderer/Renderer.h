@@ -97,8 +97,8 @@ namespace Engine
 		void UpdateModel(glm::mat4 model, unsigned int updateShape);
 		void UpdateMaterial(MaterialData& material);
 		void UpdateDirectionalLight(LightData& light, DirectionLightData& directional);
-		void UpdatePointLight(LightData& light, PointLightData& point);
-		void UpdateSpotLight(LightData& light, SpotLightData& spot);
+		void UpdatePointLight(LightData& light, PointLightData& point, int i);
+		void UpdateSpotLight(LightData& light, SpotLightData& spot, int i);
 
 		void StopShader();
 		void DeleteBuffers(unsigned int& vao, unsigned int& vbo, unsigned int& ebo);

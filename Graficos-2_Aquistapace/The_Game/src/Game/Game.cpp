@@ -12,9 +12,6 @@ namespace Engine
 		_cameraGame = NULL;
 
 		_lightCube = NULL;
-		_directionalLight = NULL;
-		_pointLight = NULL;
-		_spotLight = NULL;
 
 		for (Cube* item : _walls)
 		{
@@ -44,22 +41,6 @@ namespace Engine
 		{
 			delete _cameraGame;
 			_cameraGame = NULL;
-		}
-		
-		if (_directionalLight != NULL)
-		{
-			delete _directionalLight;
-			_directionalLight = NULL;
-		}
-		if (_pointLight != NULL)
-		{
-			delete _pointLight;
-			_pointLight = NULL;
-		}
-		if (_spotLight != NULL)
-		{
-			delete _spotLight;
-			_spotLight = NULL;
 		}
 
 		if (_lightCube != NULL)
@@ -95,15 +76,13 @@ namespace Engine
 		_lightCube = new Cube(GetRenderer());
 		_lightCube->InitTexture("res/super-mario-question-block.png", NULL);
 		_lightCube->SetPosition(2, 1, -2);
-		// Pearl:
-		//_lightCube->SetMaterial(glm::vec3(0.25f, 0.20725f, 0.20725f), glm::vec3(1, 0.829f, 0.829f), glm::vec3(0.296648f, 0.296648f, 0.296648f), 0.088f);
 
-		//_directionalLight = new DirectionalLight(GetRenderer(), 1,1,1, glm::vec3(-0.2f, -1.0f, -0.3f));
+		//GetLightManager()->AddNewDirectional(GetRenderer(), 1, 1, 1, glm::vec3(-0.2f, -1.0f, -0.3f));
 
-		//_pointLight = new PointLight(GetRenderer(), 1, 1, 1, glm::vec3(-2, 1, 2));
+		GetLightManager()->AddNewPoint(GetRenderer(), 1, 1, 1, glm::vec3(-2, 1, 2));
 
-		_spotLight = new SpotLight(GetRenderer(), 1, 1, 1, _cameraGame->GetPosition(), _cameraGame->GetFront());
-		_spotLight->SetSpotValues(0.01f, 0.3f, 0.1f);
+		//GetLightManager()->AddNewSpot(GetRenderer(), 1, 1, 1, _cameraGame->GetPosition(), _cameraGame->GetFront());
+		//GetLightManager()->GetSpot(0)->SetSpotValues(0.01f, 0.3f, 0.1f);
 
 		// --------------------------------
 
@@ -120,15 +99,12 @@ namespace Engine
 		_player->InitTexture("res/BOB-ESPONJA-1-22.png", NULL);
 		_player->SetScale(0.7f, 1, 0.7f);
 		_player->SetPosition(0, 0, 5);
-		//GetCollisionManager()->AddNewObject(_player);
 
 		// --------------------------------
 
 		_box = new Cube(GetRenderer());
 		_box->InitTexture("res/container2.png", "res/container2_specular.png");
 		_box->SetPosition(0,0,0);
-		//_box->SetMaterial(glm::vec3(0.1745f, 0.01175f, 0.01175f), glm::vec3(0.61424f, 0.04136f,	0.04136f), glm::vec3(0.727811f, 0.626959f, 0.626959f), 0.6f);
-		//GetCollisionManager()->AddNewObject(_box);
 
 		// --------------------------------
 
@@ -191,9 +167,6 @@ namespace Engine
 
 		_box->SetRotation(_box->_transform.rotation - (30 * deltaTime));
 
-		_spotLight->SetPosition(_cameraGame->GetPosition());
-		_spotLight->SetDirection(_cameraGame->GetFront());
-
 		for (Cube* item : _walls)
 		{
 			item->Draw();
@@ -202,10 +175,13 @@ namespace Engine
 		_box->Draw();
 		_player->Draw();
 
-		//_directionalLight->Draw();
-		//_pointLight->Draw();
-		_spotLight->Draw();
-		//_lightCube->Draw();
+		// ------------------------------
+		// Lights:
+
+		GetLightManager()->GetSpot(0)->SetDirection(_cameraGame->GetFront());
+		GetLightManager()->GetSpot(0)->SetPosition(_cameraGame->GetPosition());
+
+		GetLightManager()->DrawLights();
 	}
 
 	void Game::End()

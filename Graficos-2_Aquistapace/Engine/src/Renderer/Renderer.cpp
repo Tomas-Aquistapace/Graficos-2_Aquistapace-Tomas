@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <iostream>
+#include <string>
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "glm\gtc\type_ptr.hpp"
@@ -201,32 +202,38 @@ namespace Engine
 		glUseProgram(0);
 	}
 
-	void Renderer::UpdatePointLight(LightData& light, PointLightData& point)
+	void Renderer::UpdatePointLight(LightData& light, PointLightData& point, int i)
 	{
 		glUseProgram(_shader->GetShader());
 
 		glm::vec4 u_color = { 0.5f, 0.5f, 0.5f, 0.5f };
 
+		std::string fragComand = "u_pointLight[";
+		char val = ']';
+
+		fragComand.push_back(i);
+		fragComand.push_back(val);
+
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_color"), 1, &u_color[0]);
 		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_viewPos"), 1, &_camera->GetPosition()[0]);
 
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_pointLight.color"), 1, &light._color[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_pointLight.position"), 1, &point._position[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".color")), 1, &light._color[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".position")), 1, &point._position[0]);
 
-		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_pointLight.constant"), point._constant);
-		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_pointLight.linear"), point._linear);
-		glUniform1f(glGetUniformLocation(_shader->GetShader(), "u_pointLight.quadratic"), point._quadratic);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".constant")), point._constant);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".linear")), point._linear);
+		glUniform1f(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".quadratic")), point._quadratic);
 
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_pointLight.ambient"), 1, &light._ambient[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_pointLight.diffuse"), 1, &light._diffuse[0]);
-		glUniform3fv(glGetUniformLocation(_shader->GetShader(), "u_pointLight.specular"), 1, &light._specular[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".ambient")), 1, &light._ambient[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".diffuse")), 1, &light._diffuse[0]);
+		glUniform3fv(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".specular")), 1, &light._specular[0]);
 
-		glUniform1i(glGetUniformLocation(_shader->GetShader(), "u_pointLight.isActive"), light._isActive);
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), (fragComand.c_str(), ".isActive")), light._isActive);
 
 		glUseProgram(0);
 	}
 
-	void Renderer::UpdateSpotLight(LightData& light, SpotLightData& spot)
+	void Renderer::UpdateSpotLight(LightData& light, SpotLightData& spot, int i)
 	{
 		glUseProgram(_shader->GetShader());
 
