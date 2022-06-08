@@ -80,9 +80,10 @@ namespace Engine
 		//GetLightManager()->AddNewDirectional(GetRenderer(), 1, 1, 1, glm::vec3(-0.2f, -1.0f, -0.3f));
 
 		GetLightManager()->AddNewPoint(GetRenderer(), 1, 1, 1, glm::vec3(-2, 1, 2));
+		GetLightManager()->AddNewPoint(GetRenderer(), 1, 1, 1, glm::vec3(2, 1, -2));
 
-		//GetLightManager()->AddNewSpot(GetRenderer(), 1, 1, 1, _cameraGame->GetPosition(), _cameraGame->GetFront());
-		//GetLightManager()->GetSpot(0)->SetSpotValues(0.01f, 0.3f, 0.1f);
+		GetLightManager()->AddNewSpot(GetRenderer(), 1, 1, 1, _cameraGame->GetPosition(), _cameraGame->GetFront());
+		GetLightManager()->GetSpot(0)->SetSpotValues(0.01f, 0.3f, 0.1f);
 
 		// --------------------------------
 
