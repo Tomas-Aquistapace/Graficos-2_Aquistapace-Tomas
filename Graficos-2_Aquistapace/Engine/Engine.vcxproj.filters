@@ -52,6 +52,9 @@
     <Filter Include="Light">
       <UniqueIdentifier>{52b5cde2-c6a4-4149-a542-b605b158052e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models\3D">
+      <UniqueIdentifier>{ba5529a3-7133-4fa3-95be-8da4f7fdf98e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Window\Window.cpp">
@@ -110,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="src\Light\LightManager.cpp">
       <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Models\3D\mesh.cpp">
+      <Filter>Models\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Models\3D\modelimp.cpp">
+      <Filter>Models\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="src\Light\LightManager.h">
       <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Models\3D\mesh.h">
+      <Filter>Models\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Models\3D\modelimp.h">
+      <Filter>Models\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

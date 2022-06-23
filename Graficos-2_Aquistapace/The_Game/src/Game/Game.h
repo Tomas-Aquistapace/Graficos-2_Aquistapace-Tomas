@@ -21,6 +21,9 @@ namespace Engine
 
 		Cube* _lightCube;
 
+		ModelImp* _model1;
+		ModelImp* _model2;
+
 		const float cameraSpeed = 2.25f;
 		const float cameraSpeedRot = 20;
 

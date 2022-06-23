@@ -8,6 +8,7 @@
 #include "../Shape/Shape.h"
 #include "../Sprite/Sprite.h"
 #include "../Models/Cube/Cube.h"
+#include "../Models/3D/modelimp.h"
 #include "../Animation/Animation.h"
 #include "../Input/Input.h"
 #include "../Time/Time.h"

@@ -4,6 +4,10 @@
 #include "..\Export\Export.h"
 #include "..\Renderer\Renderer.h"
 
+#include <string>
+
+using namespace std;
+
 namespace Engine
 {
 	class EXPORT_API TextureImporter
@@ -17,6 +21,7 @@ namespace Engine
 		~TextureImporter();
 
 		void ImportTexture(Renderer* renderer, const char* name, unsigned int& texture);
+		unsigned int TextureFromFile(const char* path, string const& directory, bool gamma = false);
 	};
 }
 

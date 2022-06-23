@@ -13,6 +13,9 @@ namespace Engine
 
 		_lightCube = NULL;
 
+		_model1 = NULL;
+		_model2 = NULL;
+
 		for (Cube* item : _walls)
 		{
 			item = NULL;
@@ -47,6 +50,18 @@ namespace Engine
 		{
 			delete _lightCube;
 			_lightCube = NULL;
+		}
+		
+		if (_model1 != NULL)
+		{
+			delete _model1;
+			_model1 = NULL;
+		}
+		
+		if (_model2 != NULL)
+		{
+			delete _model2;
+			_model2 = NULL;
 		}
 
 		for (Cube* item : _walls)
@@ -95,13 +110,15 @@ namespace Engine
 		_floor->SetStaticState(true);
 		GetCollisionManager()->AddNewObject(_floor);
 
-
 		_player = new Cube(GetRenderer());
 		_player->InitTexture("res/BOB-ESPONJA-1-22.png", NULL);
 		_player->SetScale(0.7f, 1, 0.7f);
 		_player->SetPosition(0, 0, 5);
 
 		// --------------------------------
+
+		_model1 = new ModelImp("res/Models/backpack/backpack.obj", GetRenderer());
+		_model1->SetPosition(0,3,0);
 
 		_box = new Cube(GetRenderer());
 		_box->InitTexture("res/container2.png", "res/container2_specular.png");
@@ -175,6 +192,8 @@ namespace Engine
 		_floor->Draw();
 		_box->Draw();
 		_player->Draw();
+
+		_model1->Draw();
 
 		// ------------------------------
 		// Lights:
